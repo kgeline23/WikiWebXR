@@ -1,0 +1,88 @@
+<meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+<html lang="en">
+	<head>
+		<title> VR Patterns </title>
+		<script src="https://cdn.babylonjs.com/babylon.js"></script>
+		<script src="https://cdn.babylonjs.com/gui/babylon.gui.js"></script>                  <!-- plugin for GUI-->
+		<script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>    <!-- plugin for loading 3D models-->
+		<script src="https://unpkg.com/earcut@2.1.1/dist/earcut.min.js"></script>
+		<script src="officeScene.js"></script>
+		<script src="conferenceScene.js"></script>
+		<style>
+			canvas 
+			{
+				width: 100%; height: 100%; background-color: black;
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id = "patternCanvas"></canvas>
+		<script type = "text/javascript">
+			const canvas = document.getElementById("patternCanvas");    //get the canvas element
+			const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
+						
+			var sceneOffice = createOfficeScene();
+			var sceneConference = createConferenceScene();
+
+			var clicks = 0;
+			var showScene = 0;
+			var advancedTexture;
+
+			
+			var createGUI = function(scene, showScene)
+			{
+				switch(showScene)
+				{
+					case 0:
+						advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, sceneConference); //sceneOffice
+						break
+					case 1:
+						advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, sceneOffice);
+						break
+				}
+				var button = BABYLON.GUI.Button.CreateSimpleButton("but", (showScene == 0)? "Conference" : "Office");
+				button.width = 0.2;
+				button.height = "40px";
+				button.color = "white";
+				button.background = "grey";
+				button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP
+				advancedTexture.addControl(button);
+				button.onPointerDownObservable.add(
+					function()
+					{
+						clicks++; 
+					}
+				);
+			}
+
+			createGUI(sceneConference, showScene); 
+
+			engine.runRenderLoop(function()
+			{
+				if(showScene == 0)
+				{
+					advancedTexture.dispose();
+					createGUI(sceneConference, showScene);
+					sceneConference.render();
+					showScene = clicks % 2; 
+				}
+				else //(showScene != (clicks % 2))
+				{ 
+ 
+					advancedTexture.dispose();
+					createGUI(sceneOffice, showScene); //sceneOffice
+					sceneOffice.render();
+					showScene = clicks % 2;
+				}
+			});
+
+			//--------------------------------------------------------------------------------
+			window.addEventListener("resize", function()
+			{
+				engine.resize();
+			})
+			
+		</script>
+	</body>
+</html>
