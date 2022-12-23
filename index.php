@@ -106,15 +106,6 @@
 		<?php
 			include(__DIR__ . "/includes/header.php");
 		?>
-		<header>
-			<nav>
-				<ul>
-					<!--<img src="background.jpeg" />-->
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Navigation Patterns</a></li>
-				</ul>
-			</nav>
-		</header>
 		<main>
 			<h1>Interaction and navigation patterns in Metaverse scenario</h1>
 			<p> Project introduction</p>
