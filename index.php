@@ -102,10 +102,10 @@
 		</style>
 	</head>
 
-	<body>
-		
-			//include(__DIR__ . "/includes/header.php");
-
+	<body>		
+		<?php
+			include(__DIR__ . "/includes/header.php");
+		?>
 		<header>
 			<nav>
 				<ul>

@@ -2,7 +2,6 @@
 	var createConferenceScene = function() 
 	{
 		var sceneConference = new BABYLON.Scene(engine);
-		sceneConference.debugLayer.show();
 
 	// camera
 		var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, 0, 25, new BABYLON.Vector3(0, 5, 10), sceneConference); //-Math.PI/2, Math.PI / 3, 25
