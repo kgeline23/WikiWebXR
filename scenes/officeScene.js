@@ -129,7 +129,7 @@ var createOfficeScene = function()
 	floor.position = new BABYLON.Vector3(0, 0.01, 0);
 	const floorMat = new BABYLON.StandardMaterial("groundMat", sceneOffice);
 	floorMat.diffuseTexture = new BABYLON.Color3.Texture("assets/textures/carpet.png", sceneOffice);
-	floorMat.specularColor = new BABYLON.Color3(0, 0, 0);
+	//floorMat.specularColor = new BABYLON.Color3(0, 0, 0);
 	floor.material = floorMat; 
 
 	var assetsManager = new BABYLON.AssetsManager(scene);

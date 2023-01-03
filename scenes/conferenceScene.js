@@ -131,7 +131,7 @@
 	//creating floor
 		const floorMat = new BABYLON.StandardMaterial("groundMaterial", sceneConference);
 		floorMat.diffuseTexture = new BABYLON.Texture("assets/textures/carpet.png", sceneConference);
-		floorMat.specularColor = new BABYLON.Color3(0, 0, 0);
+		//floorMat.specularColor = new BABYLON.Color3(0, 0, 0);
 
 		var corners = [];
 		var corners2D = [];
@@ -150,17 +150,16 @@
 	//Loading assets
 		var assetsManager = new BABYLON.AssetsManager(sceneConference);
 
-		var start = function () {/*
-			//conference table scaling and positioning
-			var carpet = sceneConference.getNodeByName("Chair.obj.cleaner.materialmerger.gles");
-			carpet.scaling = new BABYLON.Vector3(0, 0, 0);
-			carpet.position = new BABYLON.Vector3(0, 0, 0);
+		var start = function () {
+			//couche set scaling and positioning
+			var carpet = sceneConference.getNodeByName("878a013490164bce87086334b9c38c24");
+			carpet.scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
+			carpet.position = new BABYLON.Vector3(-5, -1, 0);
 
-			//conference scaling and positioning
-			var conference = sceneConference.getNodeByName("50a2fa0af02547dfbe87cc1b2d43bcf1.fbx");
-			conference.scaling = new BABYLON.Vector3(0, 0, 0);
-			conference.position = new BABYLON.Vector3(0, 0, 0);
-*/
+			//conference table scaling and positioning
+			var conference = sceneConference.getNodeByName("cfecfb0376154b2e95feccebbb294089.fbx");
+			conference.scaling = new BABYLON.Vector3(0.2, 0.2, 0.2);
+			conference.position = new BABYLON.Vector3(3, -15, 0);
 		};
 
 		assetsManager.onFinish = function (tasks) 
