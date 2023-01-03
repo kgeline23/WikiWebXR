@@ -6,8 +6,8 @@
 		<script src="https://cdn.babylonjs.com/gui/babylon.gui.js"></script>                  <!-- plugin for GUI-->
 		<script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>    <!-- plugin for loading 3D models-->
 		<script src="https://unpkg.com/earcut@2.1.1/dist/earcut.min.js"></script>
-		<script src="officeScene.js"></script>
-		<script src="conferenceScene.js"></script>
+		<script src="scenes/officeScene.js"></script>
+		<script src="scenes/conferenceScene.js"></script>
 		<style>
 			canvas 
 			{
@@ -17,7 +17,7 @@
 	</head>
 
 	<body>
-		<canvas id = "patternCanvas"></canvas>
+		<canvas class="sceneCanvas" id = "patternCanvas"></canvas>
 		<script type = "text/javascript">
 			const canvas = document.getElementById("patternCanvas");    //get the canvas element
 			const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine

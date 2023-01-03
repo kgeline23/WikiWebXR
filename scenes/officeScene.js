@@ -125,34 +125,13 @@ var createOfficeScene = function()
 	buildFromPlan(walls, ply, height, scene)
 	
 	//create the floor
-	var ground1 = BABYLON.MeshBuilder.CreateGround("ground", {width: 10, height: 8}, scene);
-	ground1.position = new BABYLON.Vector3(0, 0.01, 0);
-	const groundMat = new BABYLON.StandardMaterial("groundMat");
-	groundMat.diffuseColor = new BABYLON.Color3.Gray();
-	ground1.material = groundMat; 
-/*
-	const desk = BABYLON.SceneLoader.ImportMesh("", "./models/desk/", "scene.gltf", scene, function(mesh)
-	{
-		for (let i=0; i<mesh.length; i++) 
-		{
-			mesh[i].position = new BABYLON.Vector3(-0.75, 0, 0);
-			mesh[i].scaling = new BABYLON.Vector3(0.07, 0.07, 0.07);
-		}
-		//scene.createDefaultCameraOrLight(true, true, true);
-		scene.createDefaultEnvironment();
-	}); 
+	var floor = BABYLON.MeshBuilder.CreateGround("ground", {width: 10, height: 8}, scene);
+	floor.position = new BABYLON.Vector3(0, 0.01, 0);
+	const floorMat = new BABYLON.StandardMaterial("groundMat", sceneOffice);
+	floorMat.diffuseTexture = new BABYLON.Color3.Texture("assets/textures/carpet.png", sceneOffice);
+	floorMat.specularColor = new BABYLON.Color3(0, 0, 0);
+	floor.material = floorMat; 
 
-	const chair = BABYLON.SceneLoader.ImportMesh("", "./models/chair/", "scene.gltf", scene, function(mesh)
-	{
-		for (let i=0; i<mesh.length; i++) 
-		{
-			mesh[i].position = new BABYLON.Vector3(5, 0.3, -1); // x , height, z
-			mesh[i].scaling = new BABYLON.Vector3(0.3, 0.3, 0.3);
-		}
-		//scene.createDefaultCameraOrLight(true, true, true);
-		scene.createDefaultEnvironment();
-	});
-	*/
 	var assetsManager = new BABYLON.AssetsManager(scene);
 
     assetsManager.onFinish = function (tasks) 
@@ -186,9 +165,9 @@ var createOfficeScene = function()
 	var myMesh = [];
 
 	//LoadEntity("skull", "test", "scenes/", "skull.babylon", assetsManager, myMesh, 1);
-    LoadEntity("chair", "", "./models/chair/", "scene.gltf", assetsManager, myMesh);
-    LoadEntity("desk", "", "./models/desk/", "scene.gltf", assetsManager, myMesh);
-	LoadEntity("bookshelf", "", "./models/bookshelf/", "scene.gltf", assetsManager, myMesh);
+    LoadEntity("chair", "", "./assets/models/chair/", "scene.gltf", assetsManager, myMesh);
+    LoadEntity("desk", "", "./assets/models/desk/", "scene.gltf", assetsManager, myMesh);
+	LoadEntity("bookshelf", "", "./assets/models/bookshelf/", "scene.gltf", assetsManager, myMesh);
 	
     assetsManager.load();
 

@@ -2,6 +2,12 @@
 	var createConferenceScene = function() 
 	{
 		var sceneConference = new BABYLON.Scene(engine);
+		
+	//inspector just for editing, REMOVE LATER
+		scene.debugLayer.show(
+		{
+		  embedMode: true,
+		});
 
 	// camera
 		var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, 0, 25, new BABYLON.Vector3(0, 5, 10), sceneConference); //-Math.PI/2, Math.PI / 3, 25
@@ -123,9 +129,9 @@
 		buildFromPlan(walls, ply, height, /*{interiorUV: new BABYLON.Vector4(0.2, 0, 1, 1), exteriorUV: new BABYLON.Vector4(0.2, 0, 1, 1), interior:true},*/ sceneConference);
 		
 	//creating floor
-		const groundMaterial = new BABYLON.StandardMaterial("groundMaterial", sceneConference);
-		groundMaterial.diffuseTexture = new BABYLON.Texture("./models/carpet_big/textures/material_3_baseColor.jpeg", sceneConference);
-		groundMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+		const floorMat = new BABYLON.StandardMaterial("groundMaterial", sceneConference);
+		floorMat.diffuseTexture = new BABYLON.Texture("assets/textures/carpet.png", sceneConference);
+		floorMat.specularColor = new BABYLON.Color3(0, 0, 0);
 
 		var corners = [];
 		var corners2D = [];
@@ -137,14 +143,15 @@
 		
 		const fl = new BABYLON.PolygonMeshBuilder("floor", corners2D);
 		const floor = fl.build();
-		floor.material = groundMaterial;
+		floor.material = floorMat;
+		
 
 
 	//Loading assets
 		var assetsManager = new BABYLON.AssetsManager(sceneConference);
 
 		var start = function () {/*
-			//carpet scaling and positioning
+			//conference table scaling and positioning
 			var carpet = sceneConference.getNodeByName("Chair.obj.cleaner.materialmerger.gles");
 			carpet.scaling = new BABYLON.Vector3(0, 0, 0);
 			carpet.position = new BABYLON.Vector3(0, 0, 0);
@@ -186,8 +193,8 @@
 		
 		var myMesh = [];
 		
-		//LoadEntity("conference", "", "./models/conference/", "scene.gltf", assetsManager, myMesh);
-		//LoadEntity("desk", "", "./models/carpet/", "scene.gltf", assetsManager, myMesh, 3);
+		LoadEntity("conference", "", "./assets/models/conference/", "scene.gltf", assetsManager, myMesh);
+		LoadEntity("couch_set", "", "./assets/models/couch_set/", "scene.gltf", assetsManager, myMesh);
 
 		assetsManager.load();
 		
