@@ -130,7 +130,7 @@
 		
 	//creating floor
 		const floorMat = new BABYLON.StandardMaterial("groundMaterial", sceneConference);
-		floorMat.diffuseTexture = new BABYLON.Texture("assets/textures/carpet.png", sceneConference);
+		floorMat.diffuseTexture = new BABYLON.Texture("./assets/textures/carpet.png", sceneConference);
 		//floorMat.specularColor = new BABYLON.Color3(0, 0, 0);
 
 		var corners = [];
@@ -151,8 +151,8 @@
 		var assetsManager = new BABYLON.AssetsManager(sceneConference);
 
 		var start = function () {
-			//couche set scaling and positioning
-			var carpet = sceneConference.getNodeByName("878a013490164bce87086334b9c38c24");
+			//couch set scaling and positioning
+			var carpet = sceneConference.getNodeByName("878a013490164bce87086334b9c38c24.fbx");
 			carpet.scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
 			carpet.position = new BABYLON.Vector3(-5, -1, 0);
 
