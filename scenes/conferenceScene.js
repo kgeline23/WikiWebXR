@@ -1,19 +1,14 @@
 
 	var createConferenceScene = function() 
 	{
-		var sceneConference = new BABYLON.Scene(engine);
+		var scene = new BABYLON.Scene(engine);
 		
 	//inspector just for editing, REMOVE LATER
-		scene.debugLayer.show(
+	scene.debugLayer.show(
 		{
 		  embedMode: true,
 		});
 
-	// camera
-		var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, 0, 25, new BABYLON.Vector3(0, 5, 10), sceneConference); //-Math.PI/2, Math.PI / 3, 25
-		camera.attachControl(canvas, true);
-
-		var light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), sceneConference);
 
 	//creating room/walls	
 		var corner = function (x, y) {
@@ -24,7 +19,7 @@
 			this.corner = corner;
 		}
 		
-		var buildFromPlan = function(walls, ply, height, sceneConference) {
+		var buildFromPlan = function(walls, ply, height, scene) {
 		
 			var outerData = [];
 			var angle = 0;
@@ -84,7 +79,7 @@
 		
 			
 			//Create a custom mesh  
-			var customMesh = new BABYLON.Mesh("custom", sceneConference);
+			var customMesh = new BABYLON.Mesh("custom", scene);
 
 			//Create a vertexData object
 			var vertexData = new BABYLON.VertexData();
@@ -126,11 +121,11 @@
 		var ply = 0.3;
 		var height = 5;
 					
-		buildFromPlan(walls, ply, height, /*{interiorUV: new BABYLON.Vector4(0.2, 0, 1, 1), exteriorUV: new BABYLON.Vector4(0.2, 0, 1, 1), interior:true},*/ sceneConference);
+		buildFromPlan(walls, ply, height, /*{interiorUV: new BABYLON.Vector4(0.2, 0, 1, 1), exteriorUV: new BABYLON.Vector4(0.2, 0, 1, 1), interior:true},*/ scene);
 		
 	//creating floor
-		const floorMat = new BABYLON.StandardMaterial("groundMaterial", sceneConference);
-		floorMat.diffuseTexture = new BABYLON.Texture("./assets/textures/carpet.png", sceneConference);
+		const floorMat = new BABYLON.StandardMaterial("groundMaterial", scene);
+		floorMat.diffuseTexture = new BABYLON.Texture("./assets/textures/carpet.png", scene);
 		//floorMat.specularColor = new BABYLON.Color3(0, 0, 0);
 
 		var corners = [];
@@ -148,17 +143,17 @@
 
 
 	//Loading assets
-		var assetsManager = new BABYLON.AssetsManager(sceneConference);
+		var assetsManager = new BABYLON.AssetsManager(scene);
 
 		var start = function () {
 			//couch set scaling and positioning
-			var carpet = sceneConference.getNodeByName("878a013490164bce87086334b9c38c24.fbx");
+			var carpet = scene.getNodeByName("878a013490164bce87086334b9c38c24.fbx");
 			carpet.scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
 			carpet.position = new BABYLON.Vector3(-5, -1, 0);
 
 			//conference table scaling and positioning
-			var conference = sceneConference.getNodeByName("cfecfb0376154b2e95feccebbb294089.fbx");
-			conference.scaling = new BABYLON.Vector3(0.2, 0.2, 0.2);
+			var conference = scene.getNodeByName("cfecfb0376154b2e95feccebbb294089.fbx");
+			conference.scaling = new BABYLON.Vector3(0.02, 0.02, 0.02);
 			conference.position = new BABYLON.Vector3(3, -15, 0);
 		};
 
@@ -197,6 +192,6 @@
 
 		assetsManager.load();
 		
-		return sceneConference;
+		return scene;
 
 	}
