@@ -3,6 +3,7 @@ var createOfficeScene = function()
 
 	
 	var scene = new BABYLON.Scene(engine);
+	
 	// camera
 	//var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
 	var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, 0, 25, new BABYLON.Vector3(0, -5, 5), scene); 
