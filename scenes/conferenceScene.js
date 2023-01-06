@@ -8,7 +8,24 @@
 		{
 		  embedMode: true,
 		});
+	// camera
+	//var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
+	var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, 0, 25, new BABYLON.Vector3(0, -5, 5), scene); 
+	//var camera = new BABYLON.WebVRFreeCamera("Camera", new BABYLON.Vector3(0, 1.6, 0), scene);
+	camera.setTarget(BABYLON.Vector3.Zero());
+	camera.attachControl(canvas, true);
+	var defaultXRExperience = scene.createDefaultXRExperienceAsync({
+		uiOptions: {
+			sessionMode: 'immersive-ar'
+		}
+	});
+	if (!defaultXRExperience.baseExperience) {
+		// no xr support
+	} else {
+		// all good, ready to go
+	}
 
+	var light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
 
 	//creating room/walls	
 		var corner = function (x, y) {

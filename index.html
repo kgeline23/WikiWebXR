@@ -81,19 +81,7 @@
                         var showScene = 0;
                         var advancedTexture;        
                        
-                        // camera & light
-                        //var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, 0, 25, new BABYLON.Vector3(0, 5, 10), scene); //-Math.PI/2, Math.PI / 3, 25
-                        var camera = new BABYLON.WebVRFreeCamera("Camera", new BABYLON.Vector3(0, 1, 0), scene);
-                        camera.attachControl(canvas, true);
-                        var light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
-                        /* 
-                        //add VR view 
-                        VRHelper.onEnteringVR = function () 
-                        {
-                            console.log(VRHelper.currentVRCamera);
-                            reticle.parent = VRHelper.currentVRCamera;
-                        };
-                        */
+                        
                         var createGUI = function(scene, showScene)
                         {
                             switch(showScene)
