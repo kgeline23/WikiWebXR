@@ -225,6 +225,10 @@ var createOfficeScene = function()
     assetsManager.load();
 
     var start = function () {
+		        //room scaling and positioning
+				var room = scene.getNodeByName("Collada visual scene group");
+				room.scaling = new BABYLON.Vector3(1, 1, 1);
+				room.position = new BABYLON.Vector3(0, 0, 0);
     };
 
 	

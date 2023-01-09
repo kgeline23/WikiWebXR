@@ -21,7 +21,7 @@
 	}
 
 	var light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
-
+/*
 	//creating room/walls	
 		var corner = function (x, y) {
 			return new BABYLON.Vector3(x, 0, y);
@@ -133,7 +133,7 @@
 		var ply = 0.3;
 		var height = 5;
 					
-		buildFromPlan(walls, ply, height, /*{interiorUV: new BABYLON.Vector4(0.2, 0, 1, 1), exteriorUV: new BABYLON.Vector4(0.2, 0, 1, 1), interior:true},*/ scene);
+		buildFromPlan(walls, ply, height,  scene); //{interiorUV: new BABYLON.Vector4(0.2, 0, 1, 1), exteriorUV: new BABYLON.Vector4(0.2, 0, 1, 1), interior:true},
 		
 	//creating floor
 		const floorMat = new BABYLON.StandardMaterial("groundMaterial", scene);
@@ -203,7 +203,50 @@
 		LoadEntity("couch_set", "", "./assets/models/couch_set/", "scene.gltf", assetsManager, myMesh);
 
 		assetsManager.load();
+		*/
+		var assetsManager = new BABYLON.AssetsManager(scene);
+
+		assetsManager.onFinish = function (tasks) 
+		{
+			start();
+		};
 		
+		const LoadEntity = function (name, meshNameToLoad, url, file, manager, meshArray, props) 
+		{
+			var meshTask = manager.addMeshTask(name, meshNameToLoad, url, file);
+	
+			meshTask.onSuccess = function (task) 
+			{
+				meshArray[name] = task.loadedMeshes;
+				meshArray[name].position = BABYLON.Vector3.Zero();
+				//console.log(meshTask);
+				if (props) 
+				{
+					if (props.scaling) 
+					{
+						meshArray[name].scaling.copyFrom(props.scaling);
+					}
+					if (props.position) 
+					{
+						meshArray[name].position.copyFrom(props.position);
+					}
+				}
+			}
+		}
+		LoadEntity("office", "", "./assets/models/room_conference/", "scene.gltf", assetsManager, myMesh);
+		var myMesh = [];
+		
+		assetsManager.load();
+	
+		var start = function () {
+			//room scaling and positioning
+/*
+			var room = scene.getNodeByName("Collada visual scene group");
+			room.scaling = new BABYLON.Vector3(1, 1, 1);
+			room.position = new BABYLON.Vector3(0, 0, 0);
+			*/
+		};
+	
 		return scene;
 
 	}
