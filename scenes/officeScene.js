@@ -190,8 +190,7 @@ var createOfficeScene = function()
     };
 	*/
 	
-    LoadEntity("office", "", "./assets/models/office_room/", "scene.gltf", assetsManager, myMesh);
+    LoadEntity("office", "", "./assets/models/room_office/", "scene.gltf", assetsManager, myMesh);
 	
 	return scene;
-
 }
