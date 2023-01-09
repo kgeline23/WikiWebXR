@@ -22,7 +22,7 @@ var createOfficeScene = function()
 	}
 
 	var light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
-	
+/*	
 	var buildFromPlan = function(walls, ply, height, scene) 
 	{
 		var outerData = [];
@@ -188,7 +188,9 @@ var createOfficeScene = function()
         bookshelf.scaling = new BABYLON.Vector3(4.5, 4.5, 4.5);
 		bookshelf.position = new BABYLON.Vector3(-35.7, 1, 0);
     };
+	*/
 	
+    LoadEntity("office", "", "./assets/models/office_room/", "scene.gltf", assetsManager, myMesh);
 	
 	return scene;
 

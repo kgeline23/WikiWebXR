@@ -58,13 +58,66 @@
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <!--First section-->
                         <h2 class="section-heading">What are Interaction patterns</h2>
-                        <p>They are the interactions methods that can be used to interact with the virtual environment. For example, different ways of picking up a cube and resizing it. With the help of sensor and controller information, it is possible to try and make the movements as natural as currently possible.</p>
-                        <!--Second section-->
-                        <h2 class="section-heading">The types of Interaction Patterns</h2>
+                        <p>One of the many features which makes a VR experience enjoyable and of high quality are the interactions between the user and the virtual environment, these are known as the interaction patterns. An example would be different ways of picking up an object and resizing it. With the help of camera, sensor, and controller information, it is possible to try and make the movements as natural as currently possible.</p>                            
+                        <p>To be able to properly interact with the object it is required for them to have the physics properties, this means they are touchable, can fall due to gravity, objects can be thrown, etc.</p>
+                        <p>There is not one pattern that fulfills all needs, which would be quite difficult to implement, therefore it is important to know what you need your application to do and knowledge about the patterns that are available and their appropriate uses. There are a variety of available interaction patterns, however some of the patterns depend on the capabilities of the VR glasses and the software being used. The patterns will be described in the next section.</p>
+                        <!--Types of Interaction Patterns-->
+                        <h2 class="section-heading">The types of Interaction Patterns</h2>                        
+                        <!-- Selection Pattern-->
+                        <h3 class="post-subtitle">Selection Patterns</h3> 
+                        <h4 class="post-subtitle">Hand Selection </h4>
+                        <p>This can use both physical hands and tracked controllers. In hand selection, the hand actions are mimicked, meaning the object to be interacted with needs to be in hands reach and they can be directly touched and picked up with the virtual hands.
+                            It can also be possible to reach an object that is at a further distance by using a controller to extend the virtual hand in a linear manner to then interact with it.
+                            A good practice for this pattern is to calculate or input the users arm length, which gives the user a more natural feel to the interaction. This can be done by asking the user to hold out the hands in front of the body when the application is started, however this is usually done automatically by the headset.
+                        </p> </br>
+                        <h4 class="post-subtitle">Pointing Selection </h4>
+                        <p>This method requires an input device such as a controller which can be used to pick up objects from a distance or close by, this can be done with the help of a laser pointer
+                        </p> </br>
+                        <h4 class="post-subtitle">Volume-based Selection </h4>
+                        <p>The use of a container (ex. cube) to select a group of data within it.                            
+                        </p> </br>
+                        <h4 class="post-subtitle">Image-based Selection </h4>
+                        <p>//to be filled in</p> 
                         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+                        </br>
+                        <!-- Manipulation Pattern-->
+                        <h3 class="post-subtitle">Manipulation Patterns</h3>
+                        <h4 class="post-subtitle">Direct Hand Manipulation (gestures)</h4>
+                        <p>//to be filled in</p> 
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+                        </br>
+                        <h4 class="post-subtitle">Proxy Manipulation</h4>
+                        <p>the manipulation of an object through a proxy as the object scaling might not be optimal for hand manipulation, for example when the object is too large to grab with the hand.
+                        </p> </br>                        
+                        <h4 class="post-subtitle">3D Tool</h4>
+                        <p>manipulating of an object with the help of an intermediary 3D tool.                            
+                        </p> </br>
+                        
+                        <!-- Indirect Control Pattern-->
+                        <h3 class="post-subtitle">Indirect Control Pattern</h3>
+                        <h4 class="post-subtitle">Widget and Panels</h4>
+                        <p>//to be filled in</p> 
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+                        </br>
+                        <h4 class="post-subtitle">Non-spatial Interaction</h4>
+                        <p>//to be filled in</p> 
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+                        </br>
+                        <h4 class="post-subtitle">Voice Commands</h4>
+                        <p>//to be filled in</p> 
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+                        </br>
+                        
+                        <!-- Compound Pattern-->
+                        <h3 class="post-subtitle">Compound Pattern</h3>
+                        <h4 class="post-subtitle">Hand Pointing Pattern </h4> 
+                        <p>The combination of hand and pointing selection pattern, the user’s hands are visualized in the VR environment and their real time actions will be mimicked                            
+                        </p> </br>
+                        <h4 class="post-subtitle">World in Miniature Pattern</h4>
+                        <p>Combination of proxy, multi-touch (see in Navgation Patterns) and automation, in which the user can swap between exocentric and first-person viewpoints.
+                        </p> </br>
                         <a href="#!"><img class="img-fluid" src="assets/img/post-sample-image.jpg" alt="..." /></a>
                         <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
                     </div>
                 </div>
             </div>
