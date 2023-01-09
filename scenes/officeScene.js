@@ -190,7 +190,43 @@ var createOfficeScene = function()
     };
 	*/
 	
-    LoadEntity("office", "", "./assets/models/room_office/", "scene.gltf", assetsManager, myMesh);
+	var assetsManager = new BABYLON.AssetsManager(scene);
+
+    assetsManager.onFinish = function (tasks) 
+	{
+        start();
+    };
+	
+	const LoadEntity = function (name, meshNameToLoad, url, file, manager, meshArray, props) 
+	{
+        var meshTask = manager.addMeshTask(name, meshNameToLoad, url, file);
+
+        meshTask.onSuccess = function (task) 
+		{
+            meshArray[name] = task.loadedMeshes;
+            meshArray[name].position = BABYLON.Vector3.Zero();
+			//console.log(meshTask);
+            if (props) 
+			{
+                if (props.scaling) 
+				{
+                    meshArray[name].scaling.copyFrom(props.scaling);
+                }
+                if (props.position) 
+				{
+                    meshArray[name].position.copyFrom(props.position);
+                }
+            }
+        }
+    }
+	LoadEntity("office", "", "./assets/models/room_office/", "scene.gltf", assetsManager, myMesh);
+	var myMesh = [];
+	
+    assetsManager.load();
+
+    var start = function () {
+    };
+
 	
 	return scene;
 }
