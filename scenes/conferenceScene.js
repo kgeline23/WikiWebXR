@@ -7,7 +7,7 @@
 	//var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
 	var camera = new BABYLON.ArcRotateCamera("Camera", 3.55, 1.8, -4, new BABYLON.Vector3(0, -5, 5), scene); 
 	//var camera = new BABYLON.WebVRFreeCamera("Camera", new BABYLON.Vector3(0, 1.6, 0), scene);
-	camera.setTarget(BABYLON.Vector3.Zero());
+	//camera.setTarget(BABYLON.Vector3.Zero());
 	camera.attachControl(canvas, true);
 	var defaultXRExperience = scene.createDefaultXRExperienceAsync({
 		uiOptions: {
