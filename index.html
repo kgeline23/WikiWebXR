@@ -79,7 +79,9 @@
         
                         var clicks = 0;
                         var showScene = 0;
-                        var advancedTexture;                       
+                        var advancedTexture;  
+                        
+                        
                         
                         var createGUI = function(scene, showScene)
                         {
@@ -146,6 +148,10 @@
                         window.addEventListener("resize", function()
                         {
                             engine.resize();
+                            canvas.addEventListener('wheel', function(event){
+                                //mouseController.wheel(event);
+                                event.preventDefault();
+                            }, false);
                         })
                     </script>
                     
