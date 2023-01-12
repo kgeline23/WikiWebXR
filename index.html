@@ -99,6 +99,9 @@
                                 case 1:
                                     advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, sceneConference);
                                     break
+                                case 2:
+                                advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, sceneMultiOffice);
+                                break
                             }
                             var button = BABYLON.GUI.Button.CreateSimpleButton("but", (showScene == 0)? "Office" : "Conference");
                             button.width = 0.2;
@@ -124,11 +127,7 @@
                                 function()
                                 {
                                     //inspector just for editing, REMOVE LATER
-                                    //scene.debugLayer.show();
-                                    advancedTexture.dispose();
-                                    advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, sceneMultiOffice);                                    
-                                    createGUI(sceneMultiOffice, showScene);
-                                    sceneMultiOffice.render();
+                                    scene.debugLayer.show();
                                 }
                             );
                         }
@@ -145,13 +144,20 @@
                                 sceneOffice.render();
                                 showScene = clicks % 2;
                             }
-                            else //(showScene != (clicks % 2))
+                            else if (showScene != (clicks % 2))
                             { 
                                 advancedTexture.dispose();
                                 createGUI(sceneConference, showScene);
                                 sceneConference.render();
                                 showScene = clicks % 2;   
-                            }					
+                            }	
+                            else
+                            {
+                                advancedTexture.dispose();                                
+                                createGUI(sceneMultiOffice, showScene);
+                                sceneMultiOffice.render();
+                                showScene = clicks % 2;
+                            }				
                         });
         
                         //--------------------------------------------------------------------------------
