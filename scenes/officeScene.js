@@ -196,7 +196,7 @@ let createOfficeScene = function()
     };
 	
 	let myMesh = [];
-	LoadEntity("office", "", "./assets/models/room_office/", "scene.gltf", assetsManager, myMesh);
+	LoadEntity("office", "", "./assets/models/room_office/", "scene.glb", assetsManager, myMesh);
 	
     assetsManager.load();
 
