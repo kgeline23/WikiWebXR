@@ -126,7 +126,8 @@
                                     //inspector just for editing, REMOVE LATER
                                     //scene.debugLayer.show();
                                     advancedTexture.dispose();
-                                    createGUI(sceneMultiOffice, showScene); //sceneOffice
+                                    advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, sceneMultiOffice);                                    
+                                    createGUI(sceneMultiOffice, showScene);
                                     sceneMultiOffice.render();
                                 }
                             );
