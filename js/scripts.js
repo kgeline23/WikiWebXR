@@ -25,4 +25,33 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         scrollPos = currentTop;
     });
-})
+});
+
+//load models 
+const LoadEntity = function (name, meshNameToLoad, url, file, manager, meshArray, props) 
+{
+    var meshTask = manager.addMeshTask(name, meshNameToLoad, url, file);
+
+    meshTask.onSuccess = function (task) 
+    {
+        if (task.loadedMeshes.length > 0) {
+            meshArray[name] = task.loadedMeshes;
+            meshArray[name].position = BABYLON.Vector3.Zero();
+            //console.log(meshTask);
+            if (props) 
+            {
+                if (props.scaling) 
+                {
+                    meshArray[name].scaling.copyFrom(props.scaling);
+                }
+                if (props.position) 
+                {
+                    meshArray[name].position.copyFrom(props.position);
+                }
+            }
+        }
+    }
+    meshTask.onError = function (task, message, exception) {
+        console.log(message, exception);
+    }
+}

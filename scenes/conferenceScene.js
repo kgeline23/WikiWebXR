@@ -1,24 +1,15 @@
 
-	var createConferenceScene = function() 
+
+	var createConferenceScene = async function() 
 	{
 		var scene = new BABYLON.Scene(engine);
 		
 	// camera
 	//var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
-	var camera = new BABYLON.ArcRotateCamera("Camera", 3.55, 1.8, -4, new BABYLON.Vector3(0, -5, 5), scene); 
+	var camera = new BABYLON.ArcRotateCamera("Camera", 6.23, 1.4, 8, new BABYLON.Vector3(0, 0, 5), scene); 
 	//var camera = new BABYLON.WebVRFreeCamera("Camera", new BABYLON.Vector3(0, 1.6, 0), scene);
 	//camera.setTarget(BABYLON.Vector3.Zero());
 	camera.attachControl(canvas, true);
-	var defaultXRExperience = scene.createDefaultXRExperienceAsync({
-		uiOptions: {
-			sessionMode: 'immersive-ar'
-		}
-	});
-	if (!defaultXRExperience.baseExperience) {
-		// no xr support
-	} else {
-		// all good, ready to go
-	}
 
 	var light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
 /*
@@ -206,37 +197,6 @@
 		*/
 		var assetsManager = new BABYLON.AssetsManager(scene);
 
-		assetsManager.onFinish = function (tasks) 
-		{
-			start();
-		};
-		
-		const LoadEntity = function (name, meshNameToLoad, url, file, manager, meshArray, props) 
-		{
-			var meshTask = manager.addMeshTask(name, meshNameToLoad, url, file);
-	
-			meshTask.onSuccess = function (task) 
-			{
-				meshArray[name] = task.loadedMeshes;
-				meshArray[name].position = BABYLON.Vector3.Zero();
-				//console.log(meshTask);
-				if (props) 
-				{
-					if (props.scaling) 
-					{
-						meshArray[name].scaling.copyFrom(props.scaling);
-					}
-					if (props.position) 
-					{
-						meshArray[name].position.copyFrom(props.position);
-					}
-				}
-			}
-		}
-		LoadEntity("office", "", "./assets/models/room_conference/", "scene.gltf", assetsManager, myMesh);
-		var myMesh = [];
-		
-		assetsManager.load();
 	
 		var start = function () {
 			//room scaling and positioning
@@ -246,6 +206,25 @@
 			room.position = new BABYLON.Vector3(0, 0, 0);
 			*/
 		};
+		assetsManager.onFinish = function (tasks) 
+		{
+			start();
+		};		
+
+		let myMesh = [];
+		LoadEntity("office", "", "./assets/models/room_conference/", "scene.gltf", assetsManager, myMesh);
+		
+		assetsManager.load();
+
+		var defaultXRExperience = await scene.createDefaultXRExperienceAsync({
+			floorMeshes: [myMesh]
+		});
+		if (!defaultXRExperience.baseExperience) {
+			// no xr support
+		} else {
+			// all good, ready to go
+			useNavigationPatterns(defaultXRExperience, [myMesh]);
+		}
 	
 		return scene;
 

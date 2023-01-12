@@ -1,7 +1,5 @@
-var createOfficeScene = function() 
-{
-
-	
+var createOfficeScene = async function() 
+{	
 	var scene = new BABYLON.Scene(engine);
 	
 	// camera
@@ -10,16 +8,6 @@ var createOfficeScene = function()
 	//var camera = new BABYLON.WebVRFreeCamera("Camera", new BABYLON.Vector3(0, 1.6, 0), scene);
 	//camera.setTarget(BABYLON.Vector3.Zero());
 	camera.attachControl(canvas, true);
-	var defaultXRExperience = scene.createDefaultXRExperienceAsync({
-		uiOptions: {
-			sessionMode: 'immersive-ar'
-		}
-	});
-	if (!defaultXRExperience.baseExperience) {
-		// no xr support
-	} else {
-		// all good, ready to go
-	}
 
 	var light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
 /*	
@@ -190,6 +178,16 @@ var createOfficeScene = function()
     };
 	*/
 	
+
+    let start = function () {
+		//room scaling and positioning
+		var room = scene.getNodeByName("Collada visual scene group");
+		if (room) {
+			room.scaling = new BABYLON.Vector3(1, 1, 1);
+			room.position = new BABYLON.Vector3(50, 0, 200);
+		}
+    };
+	
 	var assetsManager = new BABYLON.AssetsManager(scene);
 
     assetsManager.onFinish = function (tasks) 
@@ -197,39 +195,20 @@ var createOfficeScene = function()
         start();
     };
 	
-	const LoadEntity = function (name, meshNameToLoad, url, file, manager, meshArray, props) 
-	{
-        var meshTask = manager.addMeshTask(name, meshNameToLoad, url, file);
-
-        meshTask.onSuccess = function (task) 
-		{
-            meshArray[name] = task.loadedMeshes;
-            meshArray[name].position = BABYLON.Vector3.Zero();
-			//console.log(meshTask);
-            if (props) 
-			{
-                if (props.scaling) 
-				{
-                    meshArray[name].scaling.copyFrom(props.scaling);
-                }
-                if (props.position) 
-				{
-                    meshArray[name].position.copyFrom(props.position);
-                }
-            }
-        }
-    }
+	let myMesh = [];
 	LoadEntity("office", "", "./assets/models/room_office/", "scene.gltf", assetsManager, myMesh);
-	var myMesh = [];
 	
     assetsManager.load();
 
-    var start = function () {
-		        //room scaling and positioning
-				var room = scene.getNodeByName("Collada visual scene group");
-				room.scaling = new BABYLON.Vector3(1, 1, 1);
-				room.position = new BABYLON.Vector3(50, 0, 200);
-    };
+	var defaultXRExperience = await scene.createDefaultXRExperienceAsync({
+		floorMeshes: [myMesh]
+	});
+	if (!defaultXRExperience.baseExperience) {
+		// no xr support
+	} else {
+		// all good, ready to go
+		useNavigationPatterns(defaultXRExperience, [myMesh]);
+	}
 
 	
 	return scene;
