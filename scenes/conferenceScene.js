@@ -4,7 +4,7 @@ let createConferenceScene = function()
 	
 	// camera
 	//let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
-	let camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 0, new BABYLON.Vector3(0, 0, 5), scene); 
+	let camera = new BABYLON.ArcRotateCamera("Camera", -0.88, 1.14, 18, new BABYLON.Vector3(0, 0, 5), scene); 
 	//let camera = new BABYLON.WebVRFreeCamera("Camera", new BABYLON.Vector3(0, 1.6, 0), scene);
 	//camera.setTarget(BABYLON.Vector3.Zero());
 	camera.attachControl(canvas, true);
@@ -198,11 +198,18 @@ let createConferenceScene = function()
 
 	let start = function () {
 		//room scaling and positioning
-/*
-		let room = scene.getNodeByName("Collada visual scene group");
-		room.scaling = new BABYLON.Vector3(1, 1, 1);
-		room.position = new BABYLON.Vector3(0, 0, 0);
-		*/
+		let walls = scene.getNodeByName("walls");
+		let sky = scene.getNodeByName("sky");
+		if (walls)
+		{			
+			walls.setEnabled(false);
+		}
+		if (sky)
+		{			
+			sky.setEnabled(false);
+		}
+		
+		
 	};
 	assetsManager.onFinish = function (tasks) 
 	{

@@ -3,8 +3,7 @@ const createMultiOfficeScene = function()
 	const scene = new BABYLON.Scene(engine);
 	
 	// camera
-	let camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 0, new BABYLON.Vector3(0, 0, 4.5), scene);
-	//let camera = new BABYLON.ArcRotateCamera("Camera", 1.57, 0.24, 637.24, new BABYLON.Vector3(0, 0, 0), scene); 
+	let camera = new BABYLON.ArcRotateCamera("Camera", -2.9, 0.86, 8, new BABYLON.Vector3(0, 0, 4.5), scene);
 	//let camera = new BABYLON.WebVRFreeCamera("Camera", new BABYLON.Vector3(0, 1.6, 0), scene);
 	//camera.setTarget(BABYLON.Vector3.Zero());
 	camera.attachControl(canvas, true);
@@ -13,10 +12,10 @@ const createMultiOfficeScene = function()
 
     let start = function () {
 		//room scaling and positioning
-		let room = scene.getNodeByName("Collada visual scene group");
-		if (room) {
-			room.scaling = new BABYLON.Vector3(1, 1, 1);
-			room.position = new BABYLON.Vector3(50, 0, 200);
+		let sky = scene.getNodeByName("sky");
+		if (sky)
+		{			
+			sky.setEnabled(false);
 		}
     };
 	
