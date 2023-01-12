@@ -1,26 +1,26 @@
-var createMultiOfficeScene = async function() 
-{	
-	var scene = new BABYLON.Scene(engine);
+const createMultiOfficeScene = function() 
+{
+	const scene = new BABYLON.Scene(engine);
 	
 	// camera
-	//var camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
-	var camera = new BABYLON.ArcRotateCamera("Camera", 1.57, 0.24, 637.24, new BABYLON.Vector3(0, 0, 0), scene); 
-	//var camera = new BABYLON.WebVRFreeCamera("Camera", new BABYLON.Vector3(0, 1.6, 0), scene);
+	//let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
+	let camera = new BABYLON.ArcRotateCamera("Camera", 1.57, 0.24, 637.24, new BABYLON.Vector3(0, 0, 0), scene); 
+	//let camera = new BABYLON.WebVRFreeCamera("Camera", new BABYLON.Vector3(0, 1.6, 0), scene);
 	//camera.setTarget(BABYLON.Vector3.Zero());
 	camera.attachControl(canvas, true);
 
-	var light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
+	let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
 
     let start = function () {
 		//room scaling and positioning
-		var room = scene.getNodeByName("Collada visual scene group");
+		let room = scene.getNodeByName("Collada visual scene group");
 		if (room) {
 			room.scaling = new BABYLON.Vector3(1, 1, 1);
 			room.position = new BABYLON.Vector3(50, 0, 200);
 		}
     };
 	
-	var assetsManager = new BABYLON.AssetsManager(scene);
+	let assetsManager = new BABYLON.AssetsManager(scene);
 
     assetsManager.onFinish = function (tasks) 
 	{
@@ -32,7 +32,7 @@ var createMultiOfficeScene = async function()
 	
     assetsManager.load();
 
-	var defaultXRExperience = await scene.createDefaultXRExperienceAsync({
+	let defaultXRExperience = scene.createDefaultXRExperienceAsync({
 		floorMeshes: [myMesh]
 	});
 	if (!defaultXRExperience.baseExperience) {

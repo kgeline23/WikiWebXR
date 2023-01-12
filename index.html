@@ -81,42 +81,33 @@
                         const canvas = document.getElementById("sceneCanvas");      //get the canvas element
                         const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
                         
-                        var sceneOffice = createOfficeScene();
-                        var sceneMultiOffice = createMultiOfficeScene();
-                        var sceneConference = createConferenceScene();
+                        let sceneOffice         = createOfficeScene();
+                        let sceneMultiOffice    = createMultiOfficeScene();
+                        let sceneConference     = createConferenceScene();
         
-                        var clicks = 0;
-                        var showScene = 0;
-                        var advancedTexture;                       
+                        let clicks              = 0;
+                        let showScene           = 0;
+                        let advancedTexture     = null;                
                         
-                        var createGUI = function(scene, showScene)
+                        let createGUI = function(scene, showScene)
                         {
-                            switch(showScene)
-                            {
-                                case 0:
-                                    advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, sceneOffice); //sceneOffice
-                                    break
-                                case 1:
-                                    advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, sceneConference);
-                                    break
-                                case 2:
-                                advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, sceneMultiOffice);
-                                break
-                            }
-                            var button = BABYLON.GUI.Button.CreateSimpleButton("but", (showScene == 0)? "Office" : "Conference");
-                            button.width = 0.2;
-                            button.height = "40px";
-                            button.color = "white";
-                            button.background = "grey";
-                            button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP
-                            advancedTexture.addControl(button);
-                            button.onPointerDownObservable.add(
+                            if (advancedTexture !== null)
+                                advancedTexture.dispose(); 
+                            advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, scene);
+                            let buttonScene = BABYLON.GUI.Button.CreateSimpleButton("but", (showScene == 0)? "Office" : "Conference");
+                            buttonScene.width = 0.2;
+                            buttonScene.height = "40px";
+                            buttonScene.color = "white";
+                            buttonScene.background = "grey";
+                            buttonScene.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP
+                            advancedTexture.addControl(buttonScene);
+                            buttonScene.onPointerDownObservable.add(
                                 function()
                                 {
-                                    clicks++; 
+                                    clicks++;
                                 }
                             );
-                            var button = BABYLON.GUI.Button.CreateSimpleButton("butInspect", "Inspector");
+                            let button = BABYLON.GUI.Button.CreateSimpleButton("butInspect", "Inspector");
                             button.width = 0.2;
                             button.height = "40px";
                             button.color = "white";
@@ -139,21 +130,18 @@
                         {
                             if(showScene == 0)
                             {
-                                advancedTexture.dispose();
                                 createGUI(sceneOffice, showScene); //sceneOffice
                                 sceneOffice.render();
                                 showScene = clicks % 2;
                             }
                             else if (showScene != (clicks % 2))
                             { 
-                                advancedTexture.dispose();
                                 createGUI(sceneConference, showScene);
                                 sceneConference.render();
                                 showScene = clicks % 2;   
                             }	
                             else
-                            {
-                                advancedTexture.dispose();                                
+                            {                               
                                 createGUI(sceneMultiOffice, showScene);
                                 sceneMultiOffice.render();
                                 showScene = clicks % 2;
