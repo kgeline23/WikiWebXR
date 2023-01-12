@@ -150,12 +150,10 @@
                         //--------------------------------------------------------------------------------
                         window.addEventListener("resize", function()
                         {
-                            engine.resize();
-                            canvas.addEventListener('wheel', function(event){
-                                mouseController.wheel(event);
-                                event.preventDefault();
-                            }, false);
-                        })
+                            engine.resize();                            
+                        });
+                        canvas.addEventListener('wheel', (e) => {e.preventDefault()}, false);
+
                     </script>
                     
                     <!-- Divider-->

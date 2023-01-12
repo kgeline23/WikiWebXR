@@ -4,7 +4,7 @@ let createOfficeScene = function()
 	
 	// camera
 	//let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
-	let camera = new BABYLON.ArcRotateCamera("Camera", 1.57, 0.24, 637.24, new BABYLON.Vector3(0, 0, 0), scene); 
+	let camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 0, new BABYLON.Vector3(0, 0, 0), scene); 
 	//let camera = new BABYLON.WebVRFreeCamera("Camera", new BABYLON.Vector3(0, 1.6, 0), scene);
 	//camera.setTarget(BABYLON.Vector3.Zero());
 	camera.attachControl(canvas, true);

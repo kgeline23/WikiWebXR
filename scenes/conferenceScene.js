@@ -4,7 +4,7 @@ let createConferenceScene = function()
 	
 	// camera
 	//let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
-	let camera = new BABYLON.ArcRotateCamera("Camera", 6.23, 1.4, 8, new BABYLON.Vector3(0, 0, 5), scene); 
+	let camera = new BABYLON.ArcRotateCamera("Camera", 0, 0, 0, new BABYLON.Vector3(0, 0, 5), scene); 
 	//let camera = new BABYLON.WebVRFreeCamera("Camera", new BABYLON.Vector3(0, 1.6, 0), scene);
 	//camera.setTarget(BABYLON.Vector3.Zero());
 	camera.attachControl(canvas, true);
@@ -210,7 +210,7 @@ let createConferenceScene = function()
 	};		
 
 	let myMesh = [];
-	LoadEntity("office", "", "./assets/models/room_conference/", "scene.gltf", assetsManager, myMesh);
+	LoadEntity("conference", "", "./assets/models/room_conference/", "scene.glb", assetsManager, myMesh);
 	
 	assetsManager.load();
 

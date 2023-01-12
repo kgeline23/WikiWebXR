@@ -6,8 +6,11 @@
 		<script src="https://cdn.babylonjs.com/gui/babylon.gui.js"></script>                  <!-- plugin for GUI-->
 		<script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>    <!-- plugin for loading 3D models-->
 		<script src="https://unpkg.com/earcut@2.1.1/dist/earcut.min.js"></script>
-		<script src="scenes/officeScene.js"></script>
-		<script src="scenes/conferenceScene.js"></script>
+		<script src = "scenes/officeScene.js"></script>
+        <script src = "scenes/multiofficeScene.js"></script>
+		<script src = "scenes/conferenceScene.js"></script>        
+		<script src = "js/navigations.js"></script>        
+        <script src = "js/scripts.js"></script>    
 		<style>
 			canvas 
 			{
@@ -19,83 +22,81 @@
 	<body>
 		<canvas class="sceneCanvas" id = "patternCanvas"></canvas>
 		<script type = "text/javascript">
-			const canvas = document.getElementById("patternCanvas");    //get the canvas element
-			const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
-						
-			var sceneOffice = createOfficeScene();
-			var sceneConference = createConferenceScene();
+                    const canvas = document.getElementById("sceneCanvas");      //get the canvas element
+                        const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
+                        
+                        let sceneOffice         = createOfficeScene();
+                        let sceneMultiOffice    = createMultiOfficeScene();
+                        let sceneConference     = createConferenceScene();
+        
+                        let clicks              = 0;
+                        let advancedTexture     = null;                
+                        
+                        let createGUI = function(scene)
+                        {
+                            if (advancedTexture !== null)
+                                advancedTexture.dispose(); 
+                            advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, scene);
+                            let buttonScene = BABYLON.GUI.Button.CreateSimpleButton("but", "Scene #" + (clicks % 3));
+                            buttonScene.width = 0.2;
+                            buttonScene.height = "40px";
+                            buttonScene.color = "white";
+                            buttonScene.background = "grey";
+                            buttonScene.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP
+                            advancedTexture.addControl(buttonScene);
+                            buttonScene.onPointerDownObservable.add(
+                                function()
+                                {
+                                    clicks++;
+                                }
+                            );
+                            let button = BABYLON.GUI.Button.CreateSimpleButton("butInspect", "Inspector");
+                            button.width = 0.2;
+                            button.height = "40px";
+                            button.color = "white";
+                            button.background = "gray";
+                            button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+                            advancedTexture.addControl(button);
+                            button.onPointerDownObservable.add(
+                                function()
+                                {
+                                    //inspector just for editing, REMOVE LATER
+                                    if (scene.debugLayer.isVisible())
+                                        scene.debugLayer.hide();
+                                    else
+                                        scene.debugLayer.show();
+                                }
+                            );
+                        }
+        
+                        createGUI(sceneOffice);
+        
 
-			var clicks = 0;
-			var showScene = 0;
-			var advancedTexture;
-
-			
-			var createGUI = function(scene, showScene)
-			{
-				switch(showScene)
-				{
-					case 0:
-						advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, sceneConference); //sceneOffice
-						break
-					case 1:
-						advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, sceneOffice);
-						break
-				}
-				var button = BABYLON.GUI.Button.CreateSimpleButton("but", (showScene == 0)? "Conference" : "Office");
-				button.width = 0.2;
-				button.height = "40px";
-				button.color = "white";
-				button.background = "grey";
-				button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP
-				advancedTexture.addControl(button);
-				button.onPointerDownObservable.add(
-					function()
-					{
-						clicks++; 
-					}
-				);
-				var button = BABYLON.GUI.Button.CreateSimpleButton("butInspect", "Inspector");
-					button.width = 0.2;
-					button.height = "40px";
-					button.color = "white";
-					button.background = "gray";
-					button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-					advancedTexture.addControl(button);
-					button.onPointerDownObservable.add(
-						function()
-						{
-							//inspector just for editing, REMOVE LATER
-							scene.debugLayer.show();                                    	
-						}
-				);
-			}
-
-			createGUI(sceneConference, showScene); 
-
-			engine.runRenderLoop(function()
-			{
-				if(showScene == 0)
-				{
-					advancedTexture.dispose();
-					createGUI(sceneConference, showScene);
-					sceneConference.render();
-					showScene = clicks % 2; 
-				}
-				else //(showScene != (clicks % 2))
-				{ 
- 
-					advancedTexture.dispose();
-					createGUI(sceneOffice, showScene); //sceneOffice
-					sceneOffice.render();
-					showScene = clicks % 2;
-				}
-			});
-
-			//--------------------------------------------------------------------------------
-			window.addEventListener("resize", function()
-			{
-				engine.resize();
-			})
+                        engine.runRenderLoop(function()
+                        {
+                            switch (clicks % 3) {
+                                default:
+                                case 0:
+                                    createGUI(sceneOffice);
+                                    sceneOffice.render();
+                                    break;
+                                case 1:
+                                    createGUI(sceneConference);
+                                    sceneConference.render();
+                                    break;
+                                case 2:  
+                                    createGUI(sceneMultiOffice);
+                                    sceneMultiOffice.render();
+                                    break;
+                            }
+                        });
+        
+                        //--------------------------------------------------------------------------------
+                        window.addEventListener("resize", function()
+                        {
+                            engine.resize();                            
+                        });
+                        canvas.addEventListener('wheel', (e) => {e.preventDefault()}, false);
 			
 		</script>
 	</body>
