@@ -86,15 +86,14 @@
                         let sceneConference     = createConferenceScene();
         
                         let clicks              = 0;
-                        let showScene           = 0;
                         let advancedTexture     = null;                
                         
-                        let createGUI = function(scene, showScene)
+                        let createGUI = function(scene)
                         {
                             if (advancedTexture !== null)
                                 advancedTexture.dispose(); 
                             advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, scene);
-                            let buttonScene = BABYLON.GUI.Button.CreateSimpleButton("but", (showScene == 0)? "Office" : "Conference");
+                            let buttonScene = BABYLON.GUI.Button.CreateSimpleButton("but", "Scene #" + (clicks % 3));
                             buttonScene.width = 0.2;
                             buttonScene.height = "40px";
                             buttonScene.color = "white";
@@ -118,34 +117,34 @@
                                 function()
                                 {
                                     //inspector just for editing, REMOVE LATER
-                                    scene.debugLayer.show();
+                                    if (scene.debugLayer.isVisible())
+                                        scene.debugLayer.hide();
+                                    else
+                                        scene.debugLayer.show();
                                 }
                             );
                         }
         
-                        createGUI(sceneOffice, showScene);
+                        createGUI(sceneOffice);
         
 
                         engine.runRenderLoop(function()
                         {
-                            if(showScene == 0)
-                            {
-                                createGUI(sceneOffice, showScene); //sceneOffice
-                                sceneOffice.render();
-                                showScene = clicks % 2;
+                            switch (clicks % 3) {
+                                default:
+                                case 0:
+                                    createGUI(sceneOffice);
+                                    sceneOffice.render();
+                                    break;
+                                case 1:
+                                    createGUI(sceneConference);
+                                    sceneConference.render();
+                                    break;
+                                case 2:  
+                                    createGUI(sceneMultiOffice);
+                                    sceneMultiOffice.render();
+                                    break;
                             }
-                            else if (showScene != (clicks % 2))
-                            { 
-                                createGUI(sceneConference, showScene);
-                                sceneConference.render();
-                                showScene = clicks % 2;   
-                            }	
-                            else
-                            {                               
-                                createGUI(sceneMultiOffice, showScene);
-                                sceneMultiOffice.render();
-                                showScene = clicks % 2;
-                            }				
                         });
         
                         //--------------------------------------------------------------------------------
