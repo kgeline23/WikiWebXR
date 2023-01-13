@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-//load models 
+//load models used in office, multi office and conference scenes 
 const LoadEntity = function (name, meshNameToLoad, url, file, manager, meshArray, props) 
 {
     var meshTask = manager.addMeshTask(name, meshNameToLoad, url, file);

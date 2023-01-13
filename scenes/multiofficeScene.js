@@ -27,6 +27,7 @@ const createMultiOfficeScene = function()
     };
 	
 	let myMesh = [];
+    //loadEntitiy definition in js/script.js
 	LoadEntity("multioffice", "", "./assets/models/room_multioffice/", "multioffice.gltf", assetsManager, myMesh);
 	
     assetsManager.load();
@@ -40,7 +41,6 @@ const createMultiOfficeScene = function()
 		// all good, ready to go
 		useNavigationPatterns(defaultXRExperience, [myMesh]);
 	}
-
 	
 	return scene;
 }

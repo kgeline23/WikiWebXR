@@ -5,7 +5,6 @@ let createConferenceScene = function()
 	// camera
 	//let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
 	let camera = new BABYLON.ArcRotateCamera("Camera", -0.88, 1.14, 18, new BABYLON.Vector3(0, 0, 5), scene); 
-	//let camera = new BABYLON.WebVRFreeCamera("Camera", new BABYLON.Vector3(0, 1.6, 0), scene);
 	//camera.setTarget(BABYLON.Vector3.Zero());
 	camera.attachControl(canvas, true);
 
@@ -195,7 +194,6 @@ let createConferenceScene = function()
 	*/
 	let assetsManager = new BABYLON.AssetsManager(scene);
 
-
 	let start = function () {
 		//room scaling and positioning
 		let walls = scene.getNodeByName("walls");
@@ -207,9 +205,7 @@ let createConferenceScene = function()
 		if (sky)
 		{			
 			sky.setEnabled(false);
-		}
-		
-		
+		}		
 	};
 	assetsManager.onFinish = function (tasks) 
 	{
@@ -217,6 +213,7 @@ let createConferenceScene = function()
 	};		
 
 	let myMesh = [];
+	//loadEntitiy definition in js/script.js
 	LoadEntity("conference", "", "./assets/models/room_conference/", "scene.glb", assetsManager, myMesh);
 	
 	assetsManager.load();
