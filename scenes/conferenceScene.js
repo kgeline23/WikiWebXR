@@ -225,7 +225,33 @@ let createConferenceScene = function()
 		// no xr support
 	} else {
 		// all good, ready to go
-		useNavigationPatterns(defaultXRExperience, [myMesh]);
+                            //useNavigationPatterns(defaultXRExperience, [ground]);
+                            
+                            let featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
+                            featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
+                                xrInput: xr.input,
+                                // add options here
+                                floorMeshes: [ground],
+                            });
+
+                            // ...
+                            // needs a reconfigure - re-enable the feature (will discard the old one and create a new one!)
+                            defaultXRExperience.teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
+                                xrInput: defaultXRExperience.input,
+                                floorMeshes: [ground],
+                                renderingGroupId: 1,
+                            });
+                            let teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", 
+                            {
+                                xrInput: xr.input,
+                                floorMeshes: [ground],
+                                defaultTargetMeshOptions: 
+                                {
+                                    teleportationFillColor: "#55FF99",
+                                    teleportationBorderColor: "blue",
+                                    disableLighting: true
+                                },
+                            });
 	}
 
 	return scene;
