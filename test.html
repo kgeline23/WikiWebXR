@@ -20,93 +20,94 @@
         <body>
             <canvas class="sceneCanvas" id = "patternCanvas"></canvas>
             <script type = "text/javascript">
-                const canvas = document.getElementById("sceneCanvas");      //get the canvas element
+                    const canvas = document.getElementById("sceneCanvas");      //get the canvas element
                     const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
-                    
-                    let scene = new BABYLON.Scene(engine);
-            
-                // camera
-                //let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
-                let camera = new BABYLON.ArcRotateCamera("Camera", -3.85, 0.72, 325.57, new BABYLON.Vector3(0, 0, 0), scene);
-
-                //camera.setTarget(BABYLON.Vector3.Zero());
-                camera.attachControl(canvas, true);
-
-                let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
-                let ground;
-                let start = function () {
-                    //room scaling and positioning
-                    let sky = scene.getNodeByName("sky");
-                    if (sky)
-                    {			
-                        sky.setEnabled(false);
-                    }
-                    ground = scene.getNodeByName("ground");
-                };
-                
-                let assetsManager = new BABYLON.AssetsManager(scene);
-
-                assetsManager.onFinish = function (tasks) 
-                {                
-                    start();
-                };
-                
-                let myMesh = [];
-                //loadEntitiy definition in js/script.js
-                LoadEntity("scene", "", "./assets/models/", "testScene.glb", assetsManager, myMesh);
-                
-                assetsManager.load();
-
-                let defaultXRExperience = scene.createDefaultXRExperienceAsync({
-                    xrInput: xrHelper.input,
-                    floorMeshes: [ground]
-                });
-
-                if (!defaultXRExperience.baseExperience) {
-                    // no xr support
-                } else {
-                    // all good, ready to go
-                    //useNavigationPatterns(defaultXRExperience, [ground]);
-                    
-                    let featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
-                    featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
-                        xrInput: xr.input,
-                        // add options here
-                        floorMeshes: [ground],
-                    });
-
-                    // ...
-                    // needs a reconfigure - re-enable the feature (will discard the old one and create a new one!)
-                    defaultXRExperience.teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
-                        xrInput: defaultXRExperience.input,
-                        floorMeshes: [ground],
-                        renderingGroupId: 1,
-                    });
-                    let teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", 
+                    let creatScene = function()
                     {
-                        xrInput: xr.input,
-                        floorMeshes: [ground],
-                        defaultTargetMeshOptions: 
-                        {
-                            teleportationFillColor: "#55FF99",
-                            teleportationBorderColor: "blue",
-                            disableLighting: true
-                        },
+                        let scene = new BABYLON.Scene(engine);            
+                        // camera
+                        //let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
+                        let camera = new BABYLON.ArcRotateCamera("Camera", -3.85, 0.72, 325.57, new BABYLON.Vector3(0, 0, 0), scene);
+
+                        //camera.setTarget(BABYLON.Vector3.Zero());
+                        camera.attachControl(canvas, true);
+
+                        let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
+                        let ground;
+                        let start = function () {
+                            //room scaling and positioning
+                            let sky = scene.getNodeByName("sky");
+                            if (sky)
+                            {			
+                                sky.setEnabled(false);
+                            }
+                            ground = scene.getNodeByName("ground");
+                        };
+                        
+                        let assetsManager = new BABYLON.AssetsManager(scene);
+
+                        assetsManager.onFinish = function (tasks) 
+                        {                
+                            start();
+                        };
+                        
+                        let myMesh = [];
+                        //loadEntitiy definition in js/script.js
+                        LoadEntity("scene", "", "./assets/models/", "testScene.glb", assetsManager, myMesh);
+                        
+                        assetsManager.load();
+
+                        let defaultXRExperience = scene.createDefaultXRExperienceAsync({
+                            xrInput: xrHelper.input,
+                            floorMeshes: [ground]
+                        });
+
+                        if (!defaultXRExperience.baseExperience) {
+                            // no xr support
+                        } else {
+                            // all good, ready to go
+                            //useNavigationPatterns(defaultXRExperience, [ground]);
+                            
+                            let featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
+                            featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
+                                xrInput: xr.input,
+                                // add options here
+                                floorMeshes: [ground],
+                            });
+
+                            // ...
+                            // needs a reconfigure - re-enable the feature (will discard the old one and create a new one!)
+                            defaultXRExperience.teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
+                                xrInput: defaultXRExperience.input,
+                                floorMeshes: [ground],
+                                renderingGroupId: 1,
+                            });
+                            let teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", 
+                            {
+                                xrInput: xr.input,
+                                floorMeshes: [ground],
+                                defaultTargetMeshOptions: 
+                                {
+                                    teleportationFillColor: "#55FF99",
+                                    teleportationBorderColor: "blue",
+                                    disableLighting: true
+                                },
+                            });
+                        }   
+                        return scene;       
+                    }
+                    const scene = createScene(); //Call the createScene function
+
+                    // Register a render loop to repeatedly render the scene
+                    engine.runRenderLoop(function () {
+                    scene.render();
                     });
-
-
-
-                }
-
-                
-                return scene;
-                //--------------------------------------------------------------------------------
-                window.addEventListener("resize", function()
-                {
-                    engine.resize();                            
-                });
-                canvas.addEventListener('wheel', (e) => {e.preventDefault()}, false);
-            
+                    
+                    //--------------------------------------------------------------------------------
+                    window.addEventListener("resize", function()
+                    {
+                        engine.resize();                            
+                    });
         </script>
 	</body>
 </html>

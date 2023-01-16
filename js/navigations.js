@@ -1,4 +1,4 @@
-  var xrHelper = await scene.createDefaultXRExperienceAsync({
+  var xrHelper = scene.createDefaultXRExperienceAsync({
     xrInput: xrHelper.input,
     floorMeshes: [ground] /* Array of meshes to be used as landing points */,
   });
