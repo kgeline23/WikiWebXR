@@ -36,7 +36,7 @@ let createOfficeScene = function()
 	LoadEntity("office", "", "./assets/models/room_conference/", "scene.glb", assetsManager, myMesh);
 	
     assetsManager.load();
-
+/*
 	let defaultXRExperience = scene.createDefaultXRExperienceAsync({
 		floorMeshes: [myMesh]
 	});
@@ -46,7 +46,22 @@ let createOfficeScene = function()
 		// all good, ready to go
 		useNavigationPatterns(defaultXRExperience, [myMesh]);
 	}
+*/
 
-	
+
+	try {
+		const xrHelper = WebXRExperienceHelper.CreateAsync(scene);
+	} catch (e) {
+		// no XR support
+	}
+
+	// or:
+	WebXRExperienceHelper.CreateAsync(scene).then((xrHelper) => {
+		// great success
+	}, (error) => {
+		// no xr...
+	});
+	const sessionManager = xrHelper.enterXRAsync("immersive-vr", "local-floor" /*, optionalRenderTarget */ );
+
 	return scene;
 }
