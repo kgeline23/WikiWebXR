@@ -5,11 +5,9 @@
 		<script src="https://cdn.babylonjs.com/babylon.js"></script>
 		<script src="https://cdn.babylonjs.com/gui/babylon.gui.js"></script>                  <!-- plugin for GUI-->
 		<script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>    <!-- plugin for loading 3D models-->
-		<script src="https://unpkg.com/earcut@2.1.1/dist/earcut.min.js"></script>
-		<script src = "scenes/officeScene.js"></script>
-        <script src = "scenes/multiofficeScene.js"></script>
-		<script src = "scenes/conferenceScene.js"></script>        
-		<script src = "js/navigations.js"></script>        
+		<script src="https://unpkg.com/earcut@2.1.1/dist/earcut.min.js"></script>     
+		<script src = "js/navigations.js"></script>    
+		<script src = "js/controller.js"></script>            
         <script src = "js/scripts.js"></script>    
 		<style>
 			canvas 
@@ -17,87 +15,98 @@
 				width: 100%; height: 100%; background-color: black;
 			}
 		</style>
-	</head>
+    </head>
 
-	<body>
-		<canvas class="sceneCanvas" id = "patternCanvas"></canvas>
-		<script type = "text/javascript">
-                    const canvas = document.getElementById("sceneCanvas");      //get the canvas element
-                        const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
-                        
-                        let sceneOffice         = createOfficeScene();
-                        let sceneMultiOffice    = createMultiOfficeScene();
-                        let sceneConference     = createConferenceScene();
-        
-                        let clicks              = 0;
-                        let advancedTexture     = null;                
-                        
-                        let createGUI = function(scene)
-                        {
-                            if (advancedTexture !== null)
-                                advancedTexture.dispose(); 
-                            advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, scene);
-                            let buttonScene = BABYLON.GUI.Button.CreateSimpleButton("but", "Scene #" + (clicks % 3));
-                            buttonScene.width = 0.2;
-                            buttonScene.height = "40px";
-                            buttonScene.color = "white";
-                            buttonScene.background = "grey";
-                            buttonScene.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP
-                            advancedTexture.addControl(buttonScene);
-                            buttonScene.onPointerDownObservable.add(
-                                function()
-                                {
-                                    clicks++;
-                                }
-                            );
-                            let button = BABYLON.GUI.Button.CreateSimpleButton("butInspect", "Inspector");
-                            button.width = 0.2;
-                            button.height = "40px";
-                            button.color = "white";
-                            button.background = "gray";
-                            button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-                            advancedTexture.addControl(button);
-                            button.onPointerDownObservable.add(
-                                function()
-                                {
-                                    //inspector just for editing, REMOVE LATER
-                                    if (scene.debugLayer.isVisible())
-                                        scene.debugLayer.hide();
-                                    else
-                                        scene.debugLayer.show();
-                                }
-                            );
-                        }
-        
-                        createGUI(sceneOffice);
-        
+        <body>
+            <canvas class="sceneCanvas" id = "patternCanvas"></canvas>
+            <script type = "text/javascript">
+                const canvas = document.getElementById("sceneCanvas");      //get the canvas element
+                    const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
+                    
+                    let scene = new BABYLON.Scene(engine);
+            
+                // camera
+                //let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
+                let camera = new BABYLON.ArcRotateCamera("Camera", -3.85, 0.72, 325.57, new BABYLON.Vector3(0, 0, 0), scene);
 
-                        engine.runRenderLoop(function()
+                //camera.setTarget(BABYLON.Vector3.Zero());
+                camera.attachControl(canvas, true);
+
+                let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
+                let ground;
+                let start = function () {
+                    //room scaling and positioning
+                    let sky = scene.getNodeByName("sky");
+                    if (sky)
+                    {			
+                        sky.setEnabled(false);
+                    }
+                    ground = scene.getNodeByName("ground");
+                };
+                
+                let assetsManager = new BABYLON.AssetsManager(scene);
+
+                assetsManager.onFinish = function (tasks) 
+                {                
+                    start();
+                };
+                
+                let myMesh = [];
+                //loadEntitiy definition in js/script.js
+                LoadEntity("scene", "", "./assets/models/", "testScene.glb", assetsManager, myMesh);
+                
+                assetsManager.load();
+
+                let defaultXRExperience = scene.createDefaultXRExperienceAsync({
+                    xrInput: xrHelper.input,
+                    floorMeshes: [ground]
+                });
+
+                if (!defaultXRExperience.baseExperience) {
+                    // no xr support
+                } else {
+                    // all good, ready to go
+                    //useNavigationPatterns(defaultXRExperience, [ground]);
+                    
+                    let featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
+                    featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
+                        xrInput: xr.input,
+                        // add options here
+                        floorMeshes: [ground],
+                    });
+
+                    // ...
+                    // needs a reconfigure - re-enable the feature (will discard the old one and create a new one!)
+                    defaultXRExperience.teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
+                        xrInput: defaultXRExperience.input,
+                        floorMeshes: [ground],
+                        renderingGroupId: 1,
+                    });
+                    let teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", 
+                    {
+                        xrInput: xr.input,
+                        floorMeshes: [ground],
+                        defaultTargetMeshOptions: 
                         {
-                            switch (clicks % 3) {
-                                default:
-                                case 0:
-                                    createGUI(sceneOffice);
-                                    sceneOffice.render();
-                                    break;
-                                case 1:
-                                    createGUI(sceneConference);
-                                    sceneConference.render();
-                                    break;
-                                case 2:  
-                                    createGUI(sceneMultiOffice);
-                                    sceneMultiOffice.render();
-                                    break;
-                            }
-                        });
-        
-                        //--------------------------------------------------------------------------------
-                        window.addEventListener("resize", function()
-                        {
-                            engine.resize();                            
-                        });
-                        canvas.addEventListener('wheel', (e) => {e.preventDefault()}, false);
-			
-		</script>
+                            teleportationFillColor: "#55FF99",
+                            teleportationBorderColor: "blue",
+                            disableLighting: true
+                        },
+                    });
+
+
+
+                }
+
+                
+                return scene;
+                //--------------------------------------------------------------------------------
+                window.addEventListener("resize", function()
+                {
+                    engine.resize();                            
+                });
+                canvas.addEventListener('wheel', (e) => {e.preventDefault()}, false);
+            
+        </script>
 	</body>
 </html>
