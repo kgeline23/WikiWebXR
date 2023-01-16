@@ -50,17 +50,11 @@ let createOfficeScene = function()
 
 
 	try {
-		const xrHelper = WebXRExperienceHelper.CreateAsync(scene);
+		const xrHelper = BABYLON.WebXRExperienceHelper.CreateAsync(scene);
 	} catch (e) {
 		// no XR support
 	}
 
-	// or:
-	WebXRExperienceHelper.CreateAsync(scene).then((xrHelper) => {
-		// great success
-	}, (error) => {
-		// no xr...
-	});
 	const sessionManager = xrHelper.enterXRAsync("immersive-vr", "local-floor" /*, optionalRenderTarget */ );
 
 	return scene;
