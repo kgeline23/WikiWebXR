@@ -214,7 +214,7 @@ let createConferenceScene = function()
 
 	let myMesh = [];
 	//loadEntitiy definition in js/script.js
-	LoadEntity("conference", "", "./assets/models/room_office/", "scene.glb", assetsManager, myMesh);
+	LoadEntity("conference", "", "./assets/models/room_conference/", "scene.glb", assetsManager, myMesh);
 	
 	assetsManager.load();
 

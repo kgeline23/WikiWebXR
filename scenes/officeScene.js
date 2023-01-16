@@ -1,40 +1,41 @@
 
 let createOfficeScene = function() 
-{
+{	
 	let scene = new BABYLON.Scene(engine);
 	
 	// camera
 	//let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
-	let camera = new BABYLON.ArcRotateCamera("Camera", -0.88, 1.14, 18, new BABYLON.Vector3(0, 0, 5), scene); 
+	let camera = new BABYLON.ArcRotateCamera("Camera", -3.85, 0.72, 325.57, new BABYLON.Vector3(0, 0, 0), scene);
 	//camera.setTarget(BABYLON.Vector3.Zero());
 	camera.attachControl(canvas, true);
 
 	let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
+	
 	let assetsManager = new BABYLON.AssetsManager(scene);
-
-	let start = function () {
+    let start = function () {
 		//room scaling and positioning
-		let walls = scene.getNodeByName("walls");
 		let sky = scene.getNodeByName("sky");
-		if (walls)
-		{			
-			walls.setEnabled(false);
-		}
 		if (sky)
 		{			
 			sky.setEnabled(false);
-		}		
-	};
-	assetsManager.onFinish = function (tasks) 
-	{
-		start();
-	};		
+		}
+    };	
 
+    assetsManager.onFinish = function (tasks) 
+	{
+		let mcamera = scene.getNodeByName("camera");
+		if (mcamera)
+		{			
+			camera = mcamera;
+		}
+        start();
+    };
+	
 	let myMesh = [];
 	//loadEntitiy definition in js/script.js
-	LoadEntity("conference", "", "./assets/models/room_conference/", "scene.glb", assetsManager, myMesh);
+	LoadEntity("office", "", "./assets/models/room_office/", "scene.glb", assetsManager, myMesh);
 	
-	assetsManager.load();
+    assetsManager.load();
 
 	let defaultXRExperience = scene.createDefaultXRExperienceAsync({
 		floorMeshes: [myMesh]
@@ -43,33 +44,7 @@ let createOfficeScene = function()
 		// no xr support
 	} else {
 		// all good, ready to go
-                            //useNavigationPatterns(defaultXRExperience, [ground]);
-                            
-                            let featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
-                            featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
-                                xrInput: xr.input,
-                                // add options here
-                                floorMeshes: [ground],
-                            });
-
-                            // ...
-                            // needs a reconfigure - re-enable the feature (will discard the old one and create a new one!)
-                            defaultXRExperience.teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
-                                xrInput: defaultXRExperience.input,
-                                floorMeshes: [ground],
-                                renderingGroupId: 1,
-                            });
-                            let teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", 
-                            {
-                                xrInput: xr.input,
-                                floorMeshes: [ground],
-                                defaultTargetMeshOptions: 
-                                {
-                                    teleportationFillColor: "#55FF99",
-                                    teleportationBorderColor: "blue",
-                                    disableLighting: true
-                                },
-                            });
+		useNavigationPatterns(defaultXRExperience, [myMesh]);
 	}
 
 	return scene;
