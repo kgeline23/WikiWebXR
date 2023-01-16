@@ -1,7 +1,4 @@
-  var xrHelper = scene.createDefaultXRExperienceAsync({
-    xrInput: xrHelper.input,
-    floorMeshes: [ground] /* Array of meshes to be used as landing points */,
-  });
+  
   // ...
   // needs a reconfigure - re-enable the feature (will discard the old one and create a new one!)
   let teleportation = xrHelper.teleportation;

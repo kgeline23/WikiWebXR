@@ -10,7 +10,8 @@ let createOfficeScene = function()
 	camera.attachControl(canvas, true);
 
 	let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
-
+	
+	let assetsManager = new BABYLON.AssetsManager(scene);
     let start = function () {
 		//room scaling and positioning
 		let sky = scene.getNodeByName("sky");
@@ -18,9 +19,7 @@ let createOfficeScene = function()
 		{			
 			sky.setEnabled(false);
 		}
-    };
-	
-	let assetsManager = new BABYLON.AssetsManager(scene);
+    };	
 
     assetsManager.onFinish = function (tasks) 
 	{

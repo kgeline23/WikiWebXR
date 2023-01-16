@@ -1,6 +1,6 @@
-const createMultiOfficeScene = function() 
+let createMultiOfficeScene = function() 
 {
-	const scene = new BABYLON.Scene(engine);
+	let scene = new BABYLON.Scene(engine);
 	
 	// camera
 	let camera = new BABYLON.ArcRotateCamera("Camera", -2.9, 0.86, 8, new BABYLON.Vector3(0, 0, 4.5), scene);
