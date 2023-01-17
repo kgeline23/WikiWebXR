@@ -96,6 +96,7 @@
                             if (advancedTexture !== null)
                                 advancedTexture.dispose(); 
                             advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, scene);
+                            
                             let buttonScene = BABYLON.GUI.Button.CreateSimpleButton("but", "Scene #" + (clicks % 3));
                             buttonScene.width = 0.2;
                             buttonScene.height = "40px";
@@ -128,7 +129,7 @@
                             );
                         }
         
-                        createGUI(sceneOffice);
+                        createGUI(sceneOpen);
         
 
                         engine.runRenderLoop(function()
