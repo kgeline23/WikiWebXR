@@ -51,7 +51,7 @@ let createOpenScene = function()
 		// no xr support
 	} else {
 		// all good, ready to go
-		useNavigationPatterns(defaultXRExperience, [ground]);
+		//useNavigationPatterns(defaultXRExperience, [ground]);
 		hotspotPattern(defaultXRExperience, ground);
 	}
 
