@@ -33,7 +33,7 @@ let createOfficeScene = function()
 	
 	let myMesh = [];
 	//loadEntitiy definition in js/script.js
-	LoadEntity("office", "", "./assets/models/room_office/", "scene.glb", assetsManager, myMesh);
+	//LoadEntity("office", "", "./assets/models/room_office/", "scene.glb", assetsManager, myMesh);
 	
     assetsManager.load();
 
