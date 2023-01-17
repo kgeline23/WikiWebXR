@@ -27,9 +27,15 @@ let createOpenScene = function()
         couch_set.scaling = new BABYLON.Vector3(1.25, 1.25, 1.25);
 		couch_set.position = new BABYLON.Vector3(-8, 0, -10);	
 	};
+	let ground;
 	assetsManager.onFinish = function (tasks) 
 	{
-		start();
+		start();		
+		if (scene.getNodeByName("ground"))
+		{			
+			ground = ground;
+		}
+		else console.log("no ground found");
 	};		
 
 	let myMesh = [];
@@ -45,7 +51,8 @@ let createOpenScene = function()
 		// no xr support
 	} else {
 		// all good, ready to go
-		useNavigationPatterns(defaultXRExperience, [ground]);	
+		useNavigationPatterns(defaultXRExperience, [ground]);
+		hotspotPattern(defaultXRExperience, ground);
 	}
 
 	return scene;

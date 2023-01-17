@@ -15,6 +15,24 @@
     });
   }
 
+  let hotspotPattern = (xr, ground) =>
+  {
+    let interestingSpot = new BABYLON.Vector3(-4, 0, 4);
+    let interestingSpot2 = new BABYLON.Vector3(4, 0, 4);
+    let featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
+    let teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", {
+      xrInput: xr.input,
+      floorMeshes: [ground],
+      snapPositions: [interestingSpot, interestingSpot2],
+      snapPointsOnly: true
+    });
+    teleportation.addSnapPoint(new BABYLON.Vector3(0, 0, 6));
+  }
+
+  
+
+
+
 
 
 
