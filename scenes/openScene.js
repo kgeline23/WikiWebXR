@@ -25,7 +25,7 @@ let createOpenScene = function()
 		//couch_set scaling and positioning
 		let couch_set = scene.getNodeByName("couch_set");
         couch_set.scaling = new BABYLON.Vector3(1.25, 1.25, 1.25);
-		couch_set.position = new BABYLON.Vector3(3.07, 0, 0.17);	
+		couch_set.position = new BABYLON.Vector3(-8, 0, -10);	
 	};
 	assetsManager.onFinish = function (tasks) 
 	{
