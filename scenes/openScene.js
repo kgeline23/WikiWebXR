@@ -12,12 +12,20 @@ let createOpenScene = function()
 	let assetsManager = new BABYLON.AssetsManager(scene);
 
 	let start = function () {
-		//room scaling and positioning
-		let sky = scene.getNodeByName("sky");
-		if (sky)
-		{			
-			sky.setEnabled(false);
-		}		
+		//table scaling and positioning
+		let table = scene.getNodeByName("table");
+        table.scaling = new BABYLON.Vector3(0.003, 0.003, 0.003);
+		table.position = new BABYLON.Vector3(22, 0, 15);
+
+        //kitchen scaling and positioning
+		let kitchen = scene.getNodeByName("kitchen");
+        kitchen.scaling = new BABYLON.Vector3(0.002, 0.002, 0.002);
+        kitchen.position = new BABYLON.Vector3(3.15, 0, 1.76);
+		
+		//couch_set scaling and positioning
+		let couch_set = scene.getNodeByName("couch_set");
+        couch_set.scaling = new BABYLON.Vector3(1.25, 1.25, 1.25);
+		couch_set.position = new BABYLON.Vector3(3.07, 0, 0.17);	
 	};
 	assetsManager.onFinish = function (tasks) 
 	{
@@ -26,7 +34,7 @@ let createOpenScene = function()
 
 	let myMesh = [];
 	//loadEntitiy definition in js/script.js
-	LoadEntity("open", "", "./assets/models//", "testScene.glb", assetsManager, myMesh);
+	LoadEntity("open", "", "./assets/models/", "openScene.glb", assetsManager, myMesh);
 	
 	assetsManager.load();
 
