@@ -15,12 +15,12 @@ let createOpenScene = function()
 		//table scaling and positioning
 		let table = scene.getNodeByName("table");
         table.scaling = new BABYLON.Vector3(0.003, 0.003, 0.003);
-		table.position = new BABYLON.Vector3(22, 0, 15);
+		table.position = new BABYLON.Vector3(37, 0, 2);
 
         //kitchen scaling and positioning
 		let kitchen = scene.getNodeByName("kitchen");
         kitchen.scaling = new BABYLON.Vector3(0.002, 0.002, 0.002);
-        kitchen.position = new BABYLON.Vector3(3.15, 0, 1.76);
+        kitchen.position = new BABYLON.Vector3(10, 0, 10);
 		
 		//couch_set scaling and positioning
 		let couch_set = scene.getNodeByName("couch_set");
