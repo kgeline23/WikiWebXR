@@ -23,6 +23,7 @@
 		<script src = "scenes/officeScene.js"></script>
         <script src = "scenes/multiofficeScene.js"></script>
 		<script src = "scenes/conferenceScene.js"></script>        
+		<script src = "scenes/openScene.js"></script>        
 		<script src = "js/navigations.js"></script>        
 		<script src = "js/controller.js"></script>        
         <script src = "js/scripts.js"></script>      
@@ -82,6 +83,7 @@
                         const canvas = document.getElementById("sceneCanvas");      //get the canvas element
                         const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
                         
+                        let sceneOpen         = createOpenScene();
                         let sceneOffice         = createOfficeScene();
                         let sceneMultiOffice    = createMultiOfficeScene();
                         let sceneConference     = createConferenceScene();
@@ -134,14 +136,18 @@
                             switch (clicks % 3) {
                                 default:
                                 case 0:
-                                    createGUI(sceneOffice);
-                                    sceneOffice.render();
+                                    createGUI(sceneOpen);
+                                    sceneOpen.render();
                                     break;
                                 case 1:
                                     createGUI(sceneConference);
                                     sceneConference.render();
                                     break;
                                 case 2:  
+                                    createGUI(sceneOffice);
+                                    sceneOffice.render();
+                                    break;
+                                case 3:
                                     createGUI(sceneMultiOffice);
                                     sceneMultiOffice.render();
                                     break;
