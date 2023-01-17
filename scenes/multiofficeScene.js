@@ -28,7 +28,7 @@ let createMultiOfficeScene = function()
 	
 	let myMesh = [];
     //loadEntitiy definition in js/script.js
-	LoadEntity("multioffice", "", "./assets/models/room_multioffice/", "multioffice.gltf", assetsManager, myMesh);
+	LoadEntity("multioffice", "", "./assets/models/room_multioffice/", "multioffice.glb", assetsManager, myMesh);
 	
     assetsManager.load();
 
