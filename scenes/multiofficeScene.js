@@ -32,15 +32,7 @@ let createMultiOfficeScene = function()
 	
     assetsManager.load();
 
-	let defaultXRExperience = scene.createDefaultXRExperienceAsync({
-		floorMeshes: [myMesh]
-	});
-	if (!defaultXRExperience.baseExperience) {
-		// no xr support
-	} else {
-		// all good, ready to go
-		useNavigationPatterns(defaultXRExperience, [myMesh]);
-	}
+	scene.floorMeshes = myMesh;
 	
 	return scene;
 }

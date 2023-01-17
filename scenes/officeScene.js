@@ -33,19 +33,11 @@ let createOfficeScene = function()
 	
 	let myMesh = [];
 	//loadEntitiy definition in js/script.js
-	//LoadEntity("office", "", "./assets/models/room_office/", "scene.glb", assetsManager, myMesh);
+	LoadEntity("office", "", "./assets/models/room_office/", "scene.glb", assetsManager, myMesh);
 	
     assetsManager.load();
 
-	let defaultXRExperience = scene.createDefaultXRExperienceAsync({
-		floorMeshes: [myMesh]
-	});
-	if (!defaultXRExperience.baseExperience) {
-		// no xr support
-	} else {
-		// all good, ready to go
-		useNavigationPatterns(defaultXRExperience, [myMesh]);
-	}
+	scene.floorMeshes = myMesh;
 
 	return scene;
 }

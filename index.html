@@ -83,13 +83,15 @@
                         const canvas = document.getElementById("sceneCanvas");      //get the canvas element
                         const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
                         
-                        let sceneOpen         = createOpenScene();
+                        let sceneOpen           = createOpenScene();
                         let sceneOffice         = createOfficeScene();
                         let sceneMultiOffice    = createMultiOfficeScene();
                         let sceneConference     = createConferenceScene();
         
                         let clicks              = 0;
-                        let advancedTexture     = null;                
+                        let advancedTexture     = null;
+                        
+                        let defaultXRExperience;
                         
                         let createGUI = function(scene)
                         {
@@ -127,6 +129,18 @@
                                         scene.debugLayer.show();
                                 }
                             );
+
+                            //init vr
+                            defaultXRExperience = scene.createDefaultXRExperienceAsync({
+                                floorMeshes: [scene.floorMeshes]
+                            });
+                            if (!defaultXRExperience.baseExperience) {
+                                // no xr support
+                            } else {
+                                // all good, ready to go
+                                useNavigationPatterns(defaultXRExperience, [ground]);	
+                            }
+
                         }
         
                         createGUI(sceneOpen);

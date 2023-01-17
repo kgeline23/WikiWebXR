@@ -218,15 +218,7 @@ let createConferenceScene = function()
 	
 	assetsManager.load();
 
-	let defaultXRExperience = scene.createDefaultXRExperienceAsync({
-		floorMeshes: [myMesh]
-	});
-	if (!defaultXRExperience.baseExperience) {
-		// no xr support
-	} else {
-		// all good, ready to go
-		useNavigationPatterns(defaultXRExperience, [ground]);	
-	}
+	scene.floorMeshes = myMesh;
 
 	return scene;
 }
