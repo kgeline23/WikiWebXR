@@ -39,47 +39,47 @@ if (buttonComponents.length) {
 const mainComponent = motionController.getMainComponent();
 // mainComponent always exists!
 
+
+component.onButtonStateChangedObservable.add((component) => {
+    // something changed, check the changes object
 if (component.isButton()) {
-    // we have a value
-  }
-  if (component.isAxes()) {
-    // we have axes data
-  }
+  // we have a value
+}
+if (component.isAxes()) {
+  // we have axes data
+}
 
-  let value = component.value;
-  if (value > 0.8) {
-    // do something nice with this value
-  }
-  if (component.pressed) {
-    // the component is pressed, meaning value === 1
-  }
-  
-  if (component.touched) {
-    // fingers are on the component, might be half-pressed or moved
-  }
+let value = component.value;
+if (value > 0.8) {
+  // do something nice with this value
+}
+if (component.pressed) {
+  // the component is pressed, meaning value === 1
+}
 
-  let axes = component.axes;
+if (component.touched) {
+  // fingers are on the component, might be half-pressed or moved
+}
+
+let axes = component.axes;
 if (axes.x > 0.8) {
-  // do something nice with the x-axis value
+// do something nice with the x-axis value
 }
 
 // maybe nothing happened between this and last frame
 if (!component.hasChanges) {
-    return;
+  return;
 }
 let changes = component.changes;
 if (changes.pressed) {
-    // pressed state changed
-    const isPressedNow = changes.pressed.current;
-    const wasPressedInLastFrame = changes.pressed.previous;
+  // pressed state changed
+  const isPressedNow = changes.pressed.current;
+  const wasPressedInLastFrame = changes.pressed.previous;
 }
 if (changes.value) {
-    // value changed! let's get the delta
-    const delta = changes.value.current - changes.value.previous;
+  // value changed! let's get the delta
+  const delta = changes.value.current - changes.value.previous;
 }
-
-component.onButtonStateChangedObservable.add((component) => {
-    // something changed, check the changes object
   });
   
   component.onAxisValueChangedObservable.add((values) => {
