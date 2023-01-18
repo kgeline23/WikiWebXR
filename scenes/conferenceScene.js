@@ -194,6 +194,13 @@ let createConferenceScene = function()
 	*/
 	let assetsManager = new BABYLON.AssetsManager(scene);
 
+	let myMesh = [];
+	//loadEntitiy definition in js/script.js
+	LoadEntity("conference", "", "./assets/models/room_conference/", "conferenceScene.glb", assetsManager, myMesh);
+	
+	assetsManager.load();
+
+	let ground;
 	let start = function () {
 		//room scaling and positioning
 		let walls = scene.getNodeByName("walls");
@@ -205,20 +212,17 @@ let createConferenceScene = function()
 		if (sky)
 		{			
 			sky.setEnabled(false);
-		}		
+		}
+		if(scene.getNodeByName("ground"))
+		{
+			ground = scene.getNodeByName("ground");
+		}	
 	};
+	scene.floorMeshes = myMesh;
 	assetsManager.onFinish = function (tasks) 
 	{
 		start();
 	};		
-
-	let myMesh = [];
-	//loadEntitiy definition in js/script.js
-	LoadEntity("conference", "", "./assets/models/room_conference/", "scene.glb", assetsManager, myMesh);
-	
-	assetsManager.load();
-
-	scene.floorMeshes = myMesh;
 
 	return scene;
 }
