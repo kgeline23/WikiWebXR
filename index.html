@@ -25,7 +25,7 @@
 		<script src = "scenes/conferenceScene.js"></script>        
 		<script src = "scenes/openScene.js"></script>        
 		<script src = "js/navigations.js"></script>        
-		<script src = "js/controller.js"></script>        
+		<!--<script src = "js/controller.js"></script>   -->     
         <script src = "js/scripts.js"></script>      
     </head>
     <body>
@@ -138,7 +138,7 @@
                                 // no xr support
                             } else {
                                 // all good, ready to go
-                                useNavigationPatterns(defaultXRExperience, [ground]);	
+                                useNavigationPatterns(defaultXRExperience, scene.floorMeshes);	
                             }
 
                         }

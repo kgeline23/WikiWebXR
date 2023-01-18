@@ -10,6 +10,11 @@ let createOpenScene = function()
 	let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
 	
 	let assetsManager = new BABYLON.AssetsManager(scene);
+	let myMesh = [];
+	//loadEntitiy definition in js/script.js
+	LoadEntity("open", "", "./assets/models/", "openScene.glb", assetsManager, myMesh);
+	
+	assetsManager.load();
 
 	let start = function () {
 		//table scaling and positioning
@@ -38,13 +43,7 @@ let createOpenScene = function()
 		else console.log("no ground found");
 	};		
 
-	let myMesh = [];
-	//loadEntitiy definition in js/script.js
-	LoadEntity("open", "", "./assets/models/", "openScene.glb", assetsManager, myMesh);
-	
-	assetsManager.load();
-
-	scene.floorMeshes = myMesh;
+	scene.floorMeshes = ground;
 
 	return scene;
 }
