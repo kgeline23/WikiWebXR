@@ -158,21 +158,23 @@
                                 // no xr support
                             } else {
                                 // all good, ready to go
-                                hotspotPattern(defaultXRExperience, curScene.floorMeshes);	
+                                //hotspotPattern(defaultXRExperience, curScene.floorMeshes);
+                                const controller = curScene.camera.inputs.addXRTeleportation();
+                                controller.addFloorMesh(curScene.floorMeshes);
                             }
                         }
-
                         createGUI(sceneOpen);
+
                         engine.runRenderLoop(function()
                         {
                             curScene.render();
                         });
         
-                        //--------------------------------------------------------------------------------
                         window.addEventListener("resize", function()
                         {
                             engine.resize();                            
                         });
+                        //disable scrolling on webpage when curser on canvas
                         canvas.addEventListener('wheel', (e) => {e.preventDefault()}, false);
 
                     </script>

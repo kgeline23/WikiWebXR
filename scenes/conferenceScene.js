@@ -36,6 +36,7 @@ let createConferenceScene = function()
 		}	
 	};
 	scene.floorMeshes = myMesh;
+	scene.camera = camera;
 	assetsManager.onFinish = function (tasks) 
 	{
 		start();
