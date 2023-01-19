@@ -144,21 +144,21 @@
                                 function()
                                 {
                                     //inspector just for editing, REMOVE LATER
-                                    if (scene.debugLayer.isVisible())
-                                        scene.debugLayer.hide();
+                                    if (curScene.debugLayer.isVisible())
+                                        curScene.debugLayer.hide();
                                     else
-                                        scene.debugLayer.show();
+                                        curScene.debugLayer.show();
                                 }
                             );
                             //init vr
-                            defaultXRExperience = scene.createDefaultXRExperienceAsync({
-                                floorMeshes: [scene.floorMeshes]
+                            defaultXRExperience = curScene.createDefaultXRExperienceAsync({
+                                floorMeshes: [curScene.floorMeshes]
                             });
                             if (!defaultXRExperience.baseExperience) {
                                 // no xr support
                             } else {
                                 // all good, ready to go
-                                hotspotPattern(defaultXRExperience, scene.floorMeshes);	
+                                hotspotPattern(defaultXRExperience, curScene.floorMeshes);	
                             }
                         }
 
