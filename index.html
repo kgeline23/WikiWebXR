@@ -92,7 +92,7 @@
                         let advancedTexture     = null;                        
                         let defaultXRExperience;
                         let curScene = sceneOpen;
-                        
+
                         let createGUI = function()
                         {
                             if (advancedTexture !== null)
@@ -114,16 +114,16 @@
                                     switch (clicks % 3) {
                                         default:
                                         case 0:
-                                            createGUI();
                                             curScene = sceneOpen;
+                                            createGUI();                                            
                                             break;
                                         case 1:
-                                            createGUI();
                                             curScene = sceneConference;
+                                            createGUI();                                            
                                             break;
                                         case 2:  
-                                            createGUI();
                                             curScene = sceneOffice;
+                                            createGUI();                                            
                                             break;
                                         /*
                                         case 3:
