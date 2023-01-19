@@ -15,19 +15,24 @@
 
   let hotspotPattern = (xr, floorMeshes) =>
   {
+    xr.teleportation.attach();
+    xr.pointerSelection.attach();
+
+    /*
     let interestingSpot0 = new BABYLON.Vector3(0, 1, -2);
     let interestingSpot1 = new BABYLON.Vector3(-5, 1, 0);
     let interestingSpot2 = new BABYLON.Vector3(0, 1, 2);
     let interestingSpot3 = new BABYLON.Vector3(5, 1, 0);
 
     let featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
-    let teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", {
+    let hotspot = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", {
       xrInput: xr.input,
       floorMeshes: [floorMeshes],
       snapPositions: [interestingSpot0, interestingSpot1, interestingSpot2, interestingSpot3],
       snapPointsOnly: true
     });
-    teleportation.addSnapPoint(new BABYLON.Vector3(0, 0, 6));
+    hotspot.addSnapPoint(new BABYLON.Vector3(0, 0, 6));
+    */
   }
   /*
 	positions
