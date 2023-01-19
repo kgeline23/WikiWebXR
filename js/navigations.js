@@ -15,17 +15,27 @@
 
   let hotspotPattern = (xr, floorMeshes) =>
   {
-    let interestingSpot = new BABYLON.Vector3(-4, 0, 4);
-    let interestingSpot2 = new BABYLON.Vector3(4, 0, 4);
+    let interestingSpot0 = new BABYLON.Vector3(0, 1, -2);
+    let interestingSpot1 = new BABYLON.Vector3(-5, 1, 0);
+    let interestingSpot2 = new BABYLON.Vector3(0, 1, 2);
+    let interestingSpot3 = new BABYLON.Vector3(5, 1, 0);
+
     let featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
     let teleportation = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", {
       xrInput: xr.input,
       floorMeshes: [floorMeshes],
-      snapPositions: [interestingSpot, interestingSpot2],
+      snapPositions: [interestingSpot0, interestingSpot1, interestingSpot2, interestingSpot3],
       snapPointsOnly: true
     });
     teleportation.addSnapPoint(new BABYLON.Vector3(0, 0, 6));
   }
+  /*
+	positions
+	[x= 0, z = -2]
+	[x= -5, z = 0]
+	[x= 0, z = 2]
+	[x= 5, z = 0]
+*/
 
   let locomotionPattern = (xr, floorMeshes) =>
   {
@@ -41,7 +51,7 @@
         },
       },
       {
-        allowedComponentTypes: [WebXRControllerComponent.THUMBSTICK_TYPE, WebXRControllerComponent.TOUCHPAD_TYPE],
+        allowedComponentTypes: [BABYLON.WebXRControllerComponent.THUMBSTICK_TYPE, WebXRControllerComponent.TOUCHPAD_TYPE],
         forceHandedness: "left",
         axisChangedHandler: (axes, movementState, featureContext, xrInput) => 
         {

@@ -85,18 +85,19 @@
                         
                         let sceneOpen           = createOpenScene();
                         let sceneOffice         = createOfficeScene();
-                        let sceneMultiOffice    = createMultiOfficeScene();
+                        //let sceneMultiOffice    = createMultiOfficeScene();
                         let sceneConference     = createConferenceScene();
         
                         let clicks              = 0;
-                        let advancedTexture     = null;
-                        
+                        let advancedTexture     = null;                        
                         let defaultXRExperience;
+                        let curScene = sceneOpen;
                         
-                        let createGUI = function(scene)
+                        let createGUI = function()
                         {
                             if (advancedTexture !== null)
                                 advancedTexture.dispose(); 
+                            const scene = curScene;
                             advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, scene);
                             
                             let buttonScene = BABYLON.GUI.Button.CreateSimpleButton("but", "Scene #" + (clicks % 3));
@@ -110,6 +111,27 @@
                                 function()
                                 {
                                     clicks++;
+                                    switch (clicks % 3) {
+                                        default:
+                                        case 0:
+                                            createGUI();
+                                            curScene = sceneOpen;
+                                            break;
+                                        case 1:
+                                            createGUI();
+                                            curScene = sceneConference;
+                                            break;
+                                        case 2:  
+                                            createGUI();
+                                            curScene = sceneOffice;
+                                            break;
+                                        /*
+                                        case 3:
+                                            createGUI(sceneMultiOffice);
+                                            sceneMultiOffice.render();
+                                            break;
+                                            */
+                                    }
                                 }
                             );
                             let button = BABYLON.GUI.Button.CreateSimpleButton("butInspect", "Inspector");
@@ -129,7 +151,6 @@
                                         scene.debugLayer.show();
                                 }
                             );
-
                             //init vr
                             defaultXRExperience = scene.createDefaultXRExperienceAsync({
                                 floorMeshes: [scene.floorMeshes]
@@ -138,35 +159,14 @@
                                 // no xr support
                             } else {
                                 // all good, ready to go
-                                useNavigationPatterns(defaultXRExperience, scene.floorMeshes);	
+                                hotspotPattern(defaultXRExperience, scene.floorMeshes);	
                             }
-
                         }
-        
-                        createGUI(sceneOpen);
-        
 
+                        createGUI(sceneOpen);
                         engine.runRenderLoop(function()
                         {
-                            switch (clicks % 3) {
-                                default:
-                                case 0:
-                                    createGUI(sceneOpen);
-                                    sceneOpen.render();
-                                    break;
-                                case 1:
-                                    createGUI(sceneConference);
-                                    sceneConference.render();
-                                    break;
-                                case 2:  
-                                    createGUI(sceneOffice);
-                                    sceneOffice.render();
-                                    break;
-                                case 3:
-                                    createGUI(sceneMultiOffice);
-                                    sceneMultiOffice.render();
-                                    break;
-                            }
+                            curScene.render();
                         });
         
                         //--------------------------------------------------------------------------------
