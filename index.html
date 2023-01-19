@@ -97,8 +97,7 @@
                         {
                             if (advancedTexture !== null)
                                 advancedTexture.dispose(); 
-                            const scene = curScene;
-                            advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, scene);
+                            advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, curScene);
                             
                             let buttonScene = BABYLON.GUI.Button.CreateSimpleButton("but", "Scene #" + (clicks % 3));
                             buttonScene.width = 0.2;
