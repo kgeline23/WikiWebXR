@@ -21,22 +21,18 @@
 
   let hotspotPattern = (xr, floorMeshes) =>
   {
-    let interestingSpot0 = new BABYLON.Vector3(6.48 , 1, 7.94 );
-    let interestingSpot1 = new BABYLON.Vector3(5.35 , 1, -4.52);
-    let interestingSpot2 = new BABYLON.Vector3(-6.45, 1, -3.26);
-    let interestingSpot3 = new BABYLON.Vector3(-6.7 , 1, 7.7  );
+    const interestingSpot0 = new BABYLON.Vector3(6.48 , 1, 7.94 );
+    const interestingSpot1 = new BABYLON.Vector3(5.35 , 1, -4.52);
+    const interestingSpot2 = new BABYLON.Vector3(-6.45, 1, -3.26);
+    const interestingSpot3 = new BABYLON.Vector3(-6.7 , 1, 7.7  );
 
-    let featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
-    let hotspot = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", {
+    const featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
+    const hotspot = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", {
       xrInput: xr.input,
       floorMeshes: [floorMeshes],
       snapPositions: [interestingSpot0, interestingSpot1, interestingSpot2, interestingSpot3],
+      snapToPositionRadius: 1.2,
       snapPointsOnly: true,
-      defaultTargetMeshOptions: 
-      {
-        teleportationFillColor: "#55FF99",
-        teleportationBorderColor: "blue",
-      },
     });
   }
   /*

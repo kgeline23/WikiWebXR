@@ -19,16 +19,18 @@ let createOfficeScene = function()
 		{			
 			sky.setEnabled(false);
 		}
+		//get floor/ground needed for navigation
+		if (scene.getNodeByName("floor"))
+		{			
+			scene.floorMeshes = scene.getNodeByName("floor");
+		}
+		else console.log("no ground found");
     };	
 
     assetsManager.onFinish = function (tasks) 
 	{
-		let mcamera = scene.getNodeByName("camera");
-		if (mcamera)
-		{			
-			camera = mcamera;
-		}
         start();
+		scene.camera = camera;
     };
 	
 	let myMesh = [];

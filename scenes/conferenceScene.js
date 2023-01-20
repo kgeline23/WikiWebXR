@@ -17,29 +17,31 @@ let createConferenceScene = function()
 	
 	assetsManager.load();
 
-	let ground;
 	let start = function () {
-		//room scaling and positioning
+		//disable sky and walls in model
 		let walls = scene.getNodeByName("walls");
 		let sky = scene.getNodeByName("sky");
 		if (walls)
 		{			
 			walls.setEnabled(false);
 		}
+		
 		if (sky)
 		{			
 			sky.setEnabled(false);
 		}
+
+		//get floor/ground needed for navigation
 		if(scene.getNodeByName("ground"))
 		{
-			ground = scene.getNodeByName("ground");
-		}	
+			scene.floorMeshes = scene.getNodeByName("ground");
+		}
+		else console.log("no ground found");	
 	};
 
 	assetsManager.onFinish = function (tasks) 
 	{
 		start();
-		scene.floorMeshes = ground;
 		scene.camera = camera;
 	};		
 

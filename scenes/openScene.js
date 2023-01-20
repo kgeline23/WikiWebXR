@@ -31,19 +31,20 @@ let createOpenScene = function()
 		let couch_set = scene.getNodeByName("couch_set");
         couch_set.scaling = new BABYLON.Vector3(1.25, 1.25, 1.25);
 		couch_set.position = new BABYLON.Vector3(-8, 0, -10);	
-	};
-	let ground;
-	assetsManager.onFinish = function (tasks) 
-	{
-		start();		
+
+		//get floor/ground needed for navigation
 		if (scene.getNodeByName("ground"))
 		{			
-			ground = ground;
+			scene.floorMeshes = scene.getNodeByName("ground");
 		}
 		else console.log("no ground found");
-	};		
+	};
 
-	scene.floorMeshes = ground;
+	assetsManager.onFinish = function (tasks) 
+	{
+		start();	
+		scene.camera = camera;
+	};	
 
 	return scene;
 }
