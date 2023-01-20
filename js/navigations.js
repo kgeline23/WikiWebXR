@@ -1,28 +1,30 @@
-  let useNavigationPatterns = (xr, floorMeshes) => {
+  let teleportationPatterns = (xr, floorMeshes) => {
     // snap points
+    /*
     let snapPoint = BABYLON.MeshBuilder.CreateBox('snapPoint', { height: 0.01, width: 1, depth: 1 });
     snapPoint.position.x = 4;
     snapPoint.position.z = 3;
-
-    let featuresManager = xr.baseExperience.featuresManager; 
     xr.teleportation.addSnapPoint(snapPoint);
+*/
+    let featuresManager = xr.baseExperience.featuresManager; 
     featuresManager.enableFeature(BABYLON.WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
         xrInput: xr.input,
-        // add options here
-        floorMeshes: [... floorMeshes],
+        floorMeshes: [floorMeshes],
+        useMainComponentOnly: true,
+        defaultTargetMeshOptions: 
+        {
+          teleportationFillColor: "#55FF99",
+          teleportationBorderColor: "blue",
+        },
     });
   }
 
   let hotspotPattern = (xr, floorMeshes) =>
   {
-    xr.teleportation.attach();
-    xr.pointerSelection.attach();
-
-    /*
-    let interestingSpot0 = new BABYLON.Vector3(0, 1, -2);
-    let interestingSpot1 = new BABYLON.Vector3(-5, 1, 0);
-    let interestingSpot2 = new BABYLON.Vector3(0, 1, 2);
-    let interestingSpot3 = new BABYLON.Vector3(5, 1, 0);
+    let interestingSpot0 = new BABYLON.Vector3(6.48 , 1, 7.94 );
+    let interestingSpot1 = new BABYLON.Vector3(5.35 , 1, -4.52);
+    let interestingSpot2 = new BABYLON.Vector3(-6.45, 1, -3.26);
+    let interestingSpot3 = new BABYLON.Vector3(-6.7 , 1, 7.7  );
 
     let featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
     let hotspot = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", {
@@ -31,15 +33,25 @@
       snapPositions: [interestingSpot0, interestingSpot1, interestingSpot2, interestingSpot3],
       snapPointsOnly: true
     });
-    hotspot.addSnapPoint(new BABYLON.Vector3(0, 0, 6));
-    */
   }
   /*
-	positions
+	conference positions
 	[x= 0, z = -2]
 	[x= -5, z = 0]
 	[x= 0, z = 2]
 	[x= 5, z = 0]
+    let interestingSpot0 = new BABYLON.Vector3(0, 1, -2);
+    let interestingSpot1 = new BABYLON.Vector3(-5, 1, 0);
+    let interestingSpot2 = new BABYLON.Vector3(0, 1, 2);
+    let interestingSpot3 = new BABYLON.Vector3(5, 1, 0);
+*/
+
+  /*
+	open positions
+	[x= 6.48 , z = 7.94 ]
+	[x= 5.35 , z = -4.52]
+	[x= -6.45, z = -3.26]
+	[x= -6.7 , z = 7.7  ]
 */
 
   let locomotionPattern = (xr, floorMeshes) =>
