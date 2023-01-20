@@ -31,7 +31,12 @@
       xrInput: xr.input,
       floorMeshes: [floorMeshes],
       snapPositions: [interestingSpot0, interestingSpot1, interestingSpot2, interestingSpot3],
-      snapPointsOnly: true
+      snapPointsOnly: true,
+      defaultTargetMeshOptions: 
+      {
+        teleportationFillColor: "#55FF99",
+        teleportationBorderColor: "blue",
+      },
     });
   }
   /*
