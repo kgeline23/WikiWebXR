@@ -1,11 +1,5 @@
   let teleportationPatterns = (xr, floorMeshes) => {
-    // snap points
-    /*
-    let snapPoint = BABYLON.MeshBuilder.CreateBox('snapPoint', { height: 0.01, width: 1, depth: 1 });
-    snapPoint.position.x = 4;
-    snapPoint.position.z = 3;
-    xr.teleportation.addSnapPoint(snapPoint);
-*/
+
     let featuresManager = xr.baseExperience.featuresManager; 
     featuresManager.enableFeature(BABYLON.WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
         xrInput: xr.input,
@@ -19,21 +13,19 @@
     });
   }
 
-  let hotspotPattern = (xr, floorMeshes) =>
+  let hotspotPattern = (xr, floorMeshes, hotspots) =>
   {
-    const interestingSpot0 = new BABYLON.Vector3(6.48 , 1, 7.94 );
-    const interestingSpot1 = new BABYLON.Vector3(5.35 , 1, -4.52);
-    const interestingSpot2 = new BABYLON.Vector3(-6.45, 1, -3.26);
-    const interestingSpot3 = new BABYLON.Vector3(-6.7 , 1, 7.7  );
-
     const featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
-    const hotspot = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", {
+    const move = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", {
       xrInput: xr.input,
-      floorMeshes: [floorMeshes],
-      snapPositions: [interestingSpot0, interestingSpot1, interestingSpot2, interestingSpot3],
+      floorMeshes: [floorMeshes],      
       snapToPositionRadius: 1.2,
       snapPointsOnly: true,
     });
+    for(h = 0; h < hotspots.length; h++) 
+    {
+      move.addSnapPoint(new BABYLON.Vector3(hotspots[h][0], hotspots[h][1], hotspots[h][2]));
+    }
   }
   /*
 	conference positions
@@ -53,6 +45,11 @@
 	[x= 5.35 , z = -4.52]
 	[x= -6.45, z = -3.26]
 	[x= -6.7 , z = 7.7  ]
+  
+		const interestingSpot0 = new BABYLON.Vector3(6.48 , 1, 7.94 );
+		const interestingSpot1 = new BABYLON.Vector3(5.35 , 1, -4.52);
+		const interestingSpot2 = new BABYLON.Vector3(-6.45, 1, -3.26);
+		const interestingSpot3 = new BABYLON.Vector3(-6.7 , 1, 7.7  );
 */
 
   let locomotionPattern = (xr, floorMeshes) =>

@@ -7,8 +7,7 @@ let createOpenScene = function()
 	//camera.setTarget(BABYLON.Vector3.Zero());
 	camera.attachControl(canvas, true);
 
-	let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
-	
+	let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);	
 	let assetsManager = new BABYLON.AssetsManager(scene);
 	let myMesh = [];
 	//loadEntitiy definition in js/script.js
@@ -38,6 +37,16 @@ let createOpenScene = function()
 			scene.floorMeshes = scene.getNodeByName("ground");
 		}
 		else console.log("no ground found");
+
+		//hotspot positions
+		let hotspots = 
+		[
+			[6.48 , 1, 7.94],
+			[5.35 , 1, -4.52],
+			[-6.45, 1, -3.26],
+			[-6.7 , 1, 7.7  ]
+		];
+		scene.hotspots = hotspots;		
 	};
 
 	assetsManager.onFinish = function (tasks) 
