@@ -35,11 +35,12 @@ let createConferenceScene = function()
 			ground = scene.getNodeByName("ground");
 		}	
 	};
-	scene.floorMeshes = myMesh;
-	scene.camera = camera;
+
 	assetsManager.onFinish = function (tasks) 
 	{
 		start();
+		scene.floorMeshes = ground;
+		scene.camera = camera;
 	};		
 
 	return scene;

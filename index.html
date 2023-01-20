@@ -99,6 +99,7 @@
                                 advancedTexture.dispose(); 
                             advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, curScene);
                             
+                            //Button to change scenes
                             let buttonScene = BABYLON.GUI.Button.CreateSimpleButton("but", "Scene #" + (clicks % 3));
                             buttonScene.width = 0.2;
                             buttonScene.height = "40px";
@@ -133,6 +134,8 @@
                                     }
                                 }
                             );
+                            
+                            //Button to open and close insprector
                             let button = BABYLON.GUI.Button.CreateSimpleButton("butInspect", "Inspector");
                             button.width = 0.2;
                             button.height = "40px";
@@ -158,9 +161,7 @@
                                 // no xr support
                             } else {
                                 // all good, ready to go
-                                //hotspotPattern(defaultXRExperience, curScene.floorMeshes);
-                                const controller = curScene.camera.inputs.addXRTeleportation();
-                                controller.addFloorMesh(curScene.floorMeshes);
+                                teleportationPatterns(defaultXRExperience, curScene.floorMeshes);
                             }
                         }
                         createGUI(sceneOpen);
