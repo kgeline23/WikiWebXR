@@ -25,6 +25,7 @@
     for(h = 0; h < hotspots.length; h++) 
     {
       move.addSnapPoint(new BABYLON.Vector3(hotspots[h][0], hotspots[h][1], hotspots[h][2]));
+      console.log(hotspots[h][0] + ", " + hotspots[h][1] + ", " +  hotspots[h][2]);
     }
   }
   /*

@@ -39,14 +39,13 @@ let createOpenScene = function()
 		else console.log("no ground found");
 
 		//hotspot positions
-		let hotspots = 
+		scene.hotspots = 
 		[
 			[6.48 , 1, 7.94],
 			[5.35 , 1, -4.52],
 			[-6.45, 1, -3.26],
 			[-6.7 , 1, 7.7  ]
-		];
-		scene.hotspots = hotspots;		
+		];	
 	};
 
 	assetsManager.onFinish = function (tasks) 
