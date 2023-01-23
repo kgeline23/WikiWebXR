@@ -5,7 +5,7 @@ let createOpenScene = async function(engine, canvas)
 		let scene = new BABYLON.Scene(engine);	
 		// camera
 		//let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
-		let camera = new BABYLON.ArcRotateCamera("Camera", -0.88, 1.14, 18, new BABYLON.Vector3(0, 0, 5), scene); 
+		let camera = new BABYLON.ArcRotateCamera("Camera", -0.88, 1.14, 18, new BABYLON.Vector3(0, 0, 0), scene); 
 		//camera.setTarget(BABYLON.Vector3.Zero());
 		camera.attachControl(canvas, true);
 	
@@ -20,10 +20,10 @@ let createOpenScene = async function(engine, canvas)
 		//hotspot positions
 		scene.hotspots = 
 		[
-			[6.48 , 1, 7.94],
-			[5.35 , 1, -4.52],
-			[-6.45, 1, -3.26],
-			[-6.7 , 1, 7.7  ]
+			[-9.04, 0, -9.04],
+			[-7.18, 0, 6.5  ],
+			[4.73 , 0, 5.56 ],
+			[5.66 , 0, -7.7 ]
 		];	
 		console.log("after hotspots");
 	
