@@ -1,4 +1,4 @@
-let createOpenScene = function() 
+let createOpenScene = async function() 
 {
 	let scene = new BABYLON.Scene(engine);	
 	// camera
@@ -13,7 +13,7 @@ let createOpenScene = function()
 	//loadEntitiy definition in js/script.js
 	LoadEntity("open", "", "./assets/models/", "openScene.glb", assetsManager, myMesh);
 	
-	assetsManager.load();
+	await assetsManager.load();
 
 	//hotspot positions
 	scene.hotspots = 
@@ -24,36 +24,35 @@ let createOpenScene = function()
 		[-6.7 , 1, 7.7  ]
 	];	
 	console.log("after hotspots");
-	let start = function () {
-		//table scaling and positioning
-		console.log("in start");
-		let table = scene.getNodeByName("table");
-	if (table) {}
-        table.scaling = new BABYLON.Vector3(0.003, 0.003, 0.003);
-		table.position = new BABYLON.Vector3(37, 0, 2);
-
-        //kitchen scaling and positioning
-		let kitchen = scene.getNodeByName("kitchen");
-        kitchen.scaling = new BABYLON.Vector3(0.002, 0.002, 0.002);
-        kitchen.position = new BABYLON.Vector3(10, 0, 10);
-		
-		//couch_set scaling and positioning
-		let couch_set = scene.getNodeByName("couch_set");
-        couch_set.scaling = new BABYLON.Vector3(1.25, 1.25, 1.25);
-		couch_set.position = new BABYLON.Vector3(-8, 0, -10);	
-
-		//get floor/ground needed for navigation
-		if (scene.getNodeByName("ground"))
-		{
-			console.log("get ground");			
-			scene.floorMeshes = scene.getNodeByName("ground");
-		}
-		else console.log("no ground found");
-	};
 
 	assetsManager.onFinish = function (tasks) 
 	{
-		start();	
+		//table scaling and positioning
+		console.log("in start");
+		let table = scene.getNodeByName("table");
+		if (table) {
+			table.scaling = new BABYLON.Vector3(0.003, 0.003, 0.003);
+			table.position = new BABYLON.Vector3(37, 0, 2);
+	
+			//kitchen scaling and positioning
+			let kitchen = scene.getNodeByName("kitchen");
+			kitchen.scaling = new BABYLON.Vector3(0.002, 0.002, 0.002);
+			kitchen.position = new BABYLON.Vector3(10, 0, 10);
+			
+			//couch_set scaling and positioning
+			let couch_set = scene.getNodeByName("couch_set");
+			couch_set.scaling = new BABYLON.Vector3(1.25, 1.25, 1.25);
+			couch_set.position = new BABYLON.Vector3(-8, 0, -10);	
+	
+		}
+		//get floor/ground needed for navigation
+		const ground = scene.getNodeByName("ground");
+		if (ground)
+		{
+			console.log("get ground");			
+			scene.floorMeshes = ground;
+		}
+		else console.log("no ground found");
 		scene.camera = camera;
 	};	
 

@@ -80,106 +80,111 @@
 
                     <!--Loading WebXR scene-->
                     <script type = "text/javascript">
-                        const canvas = document.getElementById("sceneCanvas");      //get the canvas element
-                        const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
-                        
-                        let sceneOpen           = createOpenScene();
-                        let sceneOffice         = createOfficeScene();
-                        //let sceneMultiOffice    = createMultiOfficeScene();
-                        let sceneConference     = createConferenceScene();
-        
-                        let clicks              = 0;
-                        let advancedTexture     = null;                        
-                        let defaultXRExperience;
-                        let curScene = sceneOpen;
-
-                        let createGUI = async function()
-                        {
-                            console.log("inside GUI") ; 
-
-                            if (advancedTexture !== null)
-                                advancedTexture.dispose(); 
-                            advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, curScene);
+                        const main = async () => {
+                            const canvas = document.getElementById("sceneCanvas");      //get the canvas element
+                            const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
                             
-                            //Button to change scenes
-                            let buttonScene = BABYLON.GUI.Button.CreateSimpleButton("but", "Scene #" + (clicks % 3));
-                            buttonScene.width = 0.2;
-                            buttonScene.height = "40px";
-                            buttonScene.color = "white";
-                            buttonScene.background = "grey";
-                            buttonScene.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP
-                            advancedTexture.addControl(buttonScene);
-                            buttonScene.onPointerDownObservable.add(
-                                function()
-                                {
-                                    clicks++;
-                                    switch (clicks % 3) {
-                                        default:
-                                        case 0:
-                                            curScene = sceneOpen;
-                                            createGUI();                                            
-                                            break;
-                                        case 1:
-                                            curScene = sceneConference;
-                                            createGUI();                                            
-                                            break;
-                                        case 2:  
-                                            curScene = sceneOffice;
-                                            createGUI();                                            
-                                            break;
-                                        /*
-                                        case 3:
-                                            createGUI(sceneMultiOffice);
-                                            sceneMultiOffice.render();
-                                            break;
-                                        */
+
+                            let sceneOpen           = await createOpenScene();
+                            let sceneOffice         = await createOfficeScene();
+                            //let sceneMultiOffice    = createMultiOfficeScene();
+                            let sceneConference     = await createConferenceScene();
+            
+                            let clicks              = 0;
+                            let advancedTexture     = null;                        
+                            let defaultXRExperience;
+                            let curScene = sceneOpen;
+
+                            let createGUI = async function()
+                            {
+                                console.log("inside GUI") ; 
+
+                                if (advancedTexture !== null)
+                                    advancedTexture.dispose(); 
+                                advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, curScene);
+                                
+                                //Button to change scenes
+                                let buttonScene = BABYLON.GUI.Button.CreateSimpleButton("but", "Scene #" + (clicks % 3));
+                                buttonScene.width = 0.2;
+                                buttonScene.height = "40px";
+                                buttonScene.color = "white";
+                                buttonScene.background = "grey";
+                                buttonScene.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_TOP
+                                advancedTexture.addControl(buttonScene);
+                                buttonScene.onPointerDownObservable.add(
+                                    function()
+                                    {
+                                        clicks++;
+                                        switch (clicks % 3) {
+                                            default:
+                                            case 0:
+                                                curScene = sceneOpen;
+                                                createGUI();                                            
+                                                break;
+                                            case 1:
+                                                curScene = sceneConference;
+                                                createGUI();                                            
+                                                break;
+                                            case 2:  
+                                                curScene = sceneOffice;
+                                                createGUI();                                            
+                                                break;
+                                            /*
+                                            case 3:
+                                                createGUI(sceneMultiOffice);
+                                                sceneMultiOffice.render();
+                                                break;
+                                            */
+                                        }
                                     }
+                                );
+                                
+                                //Button to open and close insprector
+                                let button = BABYLON.GUI.Button.CreateSimpleButton("butInspect", "Inspector");
+                                button.width = 0.2;
+                                button.height = "40px";
+                                button.color = "white";
+                                button.background = "gray";
+                                button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
+                                advancedTexture.addControl(button);
+                                button.onPointerDownObservable.add(
+                                    function()
+                                    {
+                                        //inspector just for editing, REMOVE LATER
+                                        if (curScene.debugLayer.isVisible())
+                                            curScene.debugLayer.hide();
+                                        else
+                                            curScene.debugLayer.show();
+                                    }
+                                );
+                                
+                                //init vr
+                                defaultXRExperience = await curScene.createDefaultXRExperienceAsync({
+                                    floorMeshes: curScene.floorMeshes
+                                });
+                                if (!defaultXRExperience.baseExperience) {
+                                    // no xr support
+                                    console.log("no xr");
+                                } else {
+                                    // all good, ready to go
+                                    teleportationPatterns(defaultXRExperience, curScene.floorMeshes);
+                                    //hotspotPattern(defaultXRExperience, curScene);
                                 }
-                            );
-                            
-                            //Button to open and close insprector
-                            let button = BABYLON.GUI.Button.CreateSimpleButton("butInspect", "Inspector");
-                            button.width = 0.2;
-                            button.height = "40px";
-                            button.color = "white";
-                            button.background = "gray";
-                            button.verticalAlignment = BABYLON.GUI.Control.VERTICAL_ALIGNMENT_BOTTOM;
-                            advancedTexture.addControl(button);
-                            button.onPointerDownObservable.add(
-                                function()
-                                {
-                                    //inspector just for editing, REMOVE LATER
-                                    if (curScene.debugLayer.isVisible())
-                                        curScene.debugLayer.hide();
-                                    else
-                                        curScene.debugLayer.show();
-                                }
-                            );
-                            //init vr
-                            defaultXRExperience = await curScene.createDefaultXRExperienceAsync({
-                                floorMeshes: curScene.floorMeshes
-                            });
-                            if (!defaultXRExperience.baseExperience) {
-                                // no xr support
-                                console.log("no xr");
-                            } else {
-                                // all good, ready to go
-                                teleportationPatterns(defaultXRExperience, curScene.floorMeshes);
-                                //hotspotPattern(defaultXRExperience, curScene);
                             }
+                            createGUI(sceneOpen);
+                            //disable scrolling on webpage when curser on canvas
+                            canvas.addEventListener('wheel', (e) => {e.preventDefault()}, false);
+                            engine.runRenderLoop(function()
+                            {
+                                curScene.render();
+                            });
+            
+                            window.addEventListener("resize", function()
+                            {
+                                engine.resize();                            
+                            });            
                         }
-                        createGUI(sceneOpen);
-                        //disable scrolling on webpage when curser on canvas
-                        canvas.addEventListener('wheel', (e) => {e.preventDefault()}, false);
-                        engine.runRenderLoop(function()
-                        {
-                            curScene.render();
-                        });
-        
-                        window.addEventListener("resize", function()
-                        {
-                            engine.resize();                            
-                        });                        
+                        main();            
 
                     </script>
                     
