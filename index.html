@@ -155,7 +155,7 @@
                             );
                             //init vr
                             defaultXRExperience = await curScene.createDefaultXRExperienceAsync({
-                                floorMeshes: [curScene.floorMeshes]
+                                floorMeshes: curScene.floorMeshes
                             });
                             if (!defaultXRExperience.baseExperience) {
                                 // no xr support

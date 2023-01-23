@@ -1,15 +1,14 @@
 const teleportationPatterns = (xr, floorMeshes) => {
-
     const featuresManager = xr.baseExperience.featuresManager; 
     featuresManager.enableFeature(BABYLON.WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
         xrInput: xr.input,
-        floorMeshes: [floorMeshes],
+        floorMeshes: floorMeshes,
         //useMainComponentOnly: true,
         defaultTargetMeshOptions: 
         {
           teleportationFillColor: "#55FF99",
-          teleportationBorderColor: "blue",
-        },
+          teleportationBorderColor: "blue"
+        }
     });
   }
 
@@ -18,14 +17,14 @@ const teleportationPatterns = (xr, floorMeshes) => {
     const featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
     const move = featuresManager.enableFeature(BABYLON.WebXRFeatureName.TELEPORTATION, "stable", {
       xrInput: xr.input,
-      floorMeshes: [scene.floorMeshes],      
+      floorMeshes: scene.floorMeshes,      
       snapToPositionRadius: 1.2,
       snapPointsOnly: true,
       defaultTargetMeshOptions: 
       {
         teleportationFillColor: "#55FF99",
-        teleportationBorderColor: "blue",
-      },
+        teleportationBorderColor: "blue"
+      }
     });
     const hotspots = scene.hotspots;
     for(h = 0; h < hotspots.length; h++) 
