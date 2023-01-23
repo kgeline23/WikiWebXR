@@ -1,6 +1,6 @@
-  let teleportationPatterns = (xr, floorMeshes) => {
+const teleportationPatterns = (xr, floorMeshes) => {
 
-    let featuresManager = xr.baseExperience.featuresManager; 
+    const featuresManager = xr.baseExperience.featuresManager; 
     featuresManager.enableFeature(BABYLON.WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
         xrInput: xr.input,
         floorMeshes: [floorMeshes],
@@ -28,7 +28,6 @@
       },
     });
     const hotspots = scene.hotspots;
-    console.log(scene);
     for(h = 0; h < hotspots.length; h++) 
     {
       move.addSnapPoint(new BABYLON.Vector3(hotspots[h][0], hotspots[h][1], hotspots[h][2]));
