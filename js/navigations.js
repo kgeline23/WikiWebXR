@@ -16,7 +16,7 @@
   const hotspotPattern = (xr, scene) =>
   {
     const featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
-    const move = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", {
+    const move = featuresManager.enableFeature(BABYLON.WebXRFeatureName.TELEPORTATION, "stable", {
       xrInput: xr.input,
       floorMeshes: [scene.floorMeshes],      
       snapToPositionRadius: 1.2,
