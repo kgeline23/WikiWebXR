@@ -21,6 +21,11 @@
       floorMeshes: [scene.floorMeshes],      
       snapToPositionRadius: 1.2,
       snapPointsOnly: true,
+      defaultTargetMeshOptions: 
+      {
+        teleportationFillColor: "#55FF99",
+        teleportationBorderColor: "blue",
+      },
     });
     const hotspots = scene.hotspots;
     console.log(scene);
