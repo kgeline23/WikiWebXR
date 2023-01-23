@@ -31,25 +31,26 @@ let createOpenScene = async function(engine, canvas)
 		{
 			//table scaling and positioning
 			console.log("in start");
+			/*
 			const table = scene.getNodeByName("table");
 			if (table) {
-				table.scaling = new BABYLON.Vector3(0.0003, 0.0003, 0.0003);
-				table.position = new BABYLON.Vector3(37, 0, 2);
+				table.scaling = new BABYLON.Vector3(0.0008, 0.0008, 0.0008);
+				table.position = new BABYLON.Vector3(2, 0, -3);
 			}
 			//kitchen scaling and positioning
 			const kitchen = scene.getNodeByName("kitchen");
 			if (kitchen)
 			{	
-				kitchen.scaling = new BABYLON.Vector3(0.0002, 0.0002, 0.0002);
-				kitchen.position = new BABYLON.Vector3(10, 0, 10);
+				kitchen.scaling = new BABYLON.Vector3(0.0007, 0.0007, 0.0007);
+				kitchen.position = new BABYLON.Vector3(5, -0.1, 4);
 			}
 				
 			//couch_set scaling and positioning
 			const couch_set = scene.getNodeByName("couch_set");
 			if (couch_set)
 			{
-				couch_set.scaling = new BABYLON.Vector3(0.125, 0.125, 0.125);
-				couch_set.position = new BABYLON.Vector3(-8, 0, -10);
+				couch_set.scaling = new BABYLON.Vector3(0.35, 0.35, 0.35);
+				couch_set.position = new BABYLON.Vector3(-3, 0, -4.5);
 			}	
 			//stairs scaling and positioning
 			const stairs = scene.getNodeByName("stairs");
@@ -57,12 +58,13 @@ let createOpenScene = async function(engine, canvas)
 			{
 				stairs.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
 			}
-
+*/
 			//get floor/ground needed for navigation
 			const ground = scene.getNodeByName("ground");
 			if (ground)
-			{
-				console.log("get ground");			
+			{	
+				//ground.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
+				//ground.position = new BABYLON.Vector3(0, 0, 0);
 				scene.floorMeshes = [ground];
 			}
 			else console.log("no ground found");

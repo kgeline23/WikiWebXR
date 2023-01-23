@@ -52,10 +52,10 @@ let createConferenceScene = async function(engine, canvas)
 			//hotspot positions
 			scene.hotspots = 		
 			[
-				[0 , 1, -2],
-				[-5, 1, 0 ],
-				[0 , 1, 2 ],
-				[5 , 1, 0 ]
+				[0 , 0, -2],
+				[-5, 0, 0 ],
+				[0 , 0, 2 ],
+				[5 , 0, 0 ]
 			];;				scene.camera = camera;
 			
 			resolve(scene);
