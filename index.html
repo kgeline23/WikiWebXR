@@ -86,7 +86,7 @@
 
                             let sceneOpen           = await createOpenScene(engine, canvas);
                             let sceneOffice         = await createOfficeScene(engine, canvas);
-                            //let sceneMultiOffice    = createMultiOfficeScene(engine, canvas);
+                            //let sceneMultiOffice    = await createMultiOfficeScene(engine, canvas);
                             let sceneConference     = await createConferenceScene(engine, canvas);
             
                             let clicks              = 0;
@@ -166,8 +166,8 @@
                                     console.log("no xr");
                                 } else {
                                     // all good, ready to go
-                                    teleportationPatterns(defaultXRExperience, curScene.floorMeshes);
-                                    //hotspotPattern(defaultXRExperience, curScene);
+                                    //teleportationPatterns(defaultXRExperience, curScene.floorMeshes);
+                                    hotspotPattern(defaultXRExperience, curScene);
                                 }
                             }
                             createGUI(sceneOpen);

@@ -31,22 +31,33 @@ let createOpenScene = async function(engine, canvas)
 		{
 			//table scaling and positioning
 			console.log("in start");
-			let table = scene.getNodeByName("table");
+			const table = scene.getNodeByName("table");
 			if (table) {
-				table.scaling = new BABYLON.Vector3(0.003, 0.003, 0.003);
+				table.scaling = new BABYLON.Vector3(0.0003, 0.0003, 0.0003);
 				table.position = new BABYLON.Vector3(37, 0, 2);
-		
-				//kitchen scaling and positioning
-				let kitchen = scene.getNodeByName("kitchen");
-				kitchen.scaling = new BABYLON.Vector3(0.002, 0.002, 0.002);
-				kitchen.position = new BABYLON.Vector3(10, 0, 10);
-				
-				//couch_set scaling and positioning
-				let couch_set = scene.getNodeByName("couch_set");
-				couch_set.scaling = new BABYLON.Vector3(1.25, 1.25, 1.25);
-				couch_set.position = new BABYLON.Vector3(-8, 0, -10);	
-		
 			}
+			//kitchen scaling and positioning
+			const kitchen = scene.getNodeByName("kitchen");
+			if (kitchen)
+			{	
+				kitchen.scaling = new BABYLON.Vector3(0.0002, 0.0002, 0.0002);
+				kitchen.position = new BABYLON.Vector3(10, 0, 10);
+			}
+				
+			//couch_set scaling and positioning
+			const couch_set = scene.getNodeByName("couch_set");
+			if (couch_set)
+			{
+				couch_set.scaling = new BABYLON.Vector3(0.125, 0.125, 0.125);
+				couch_set.position = new BABYLON.Vector3(-8, 0, -10);
+			}	
+			//stairs scaling and positioning
+			const stairs = scene.getNodeByName("stairs");
+			if (stairs)
+			{
+				stairs.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
+			}
+
 			//get floor/ground needed for navigation
 			const ground = scene.getNodeByName("ground");
 			if (ground)

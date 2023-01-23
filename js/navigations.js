@@ -20,18 +20,12 @@ const teleportationPatterns = (xr, floorMeshes) => {
       xrInput: xr.input,
       floorMeshes: scene.floorMeshes,      
       snapToPositionRadius: 1.2,
-      snapPointsOnly: true,
-      defaultTargetMeshOptions: 
-      {
-        teleportationFillColor: "#55FF99",
-        teleportationBorderColor: "blue"
-      }
+      snapPointsOnly: true
     });
     const hotspots = scene.hotspots;
     for(h = 0; h < hotspots.length; h++) 
     {
       move.addSnapPoint(new BABYLON.Vector3(hotspots[h][0], hotspots[h][1], hotspots[h][2]));
-      //console.log(hotspots[h][0] + ", " + hotspots[h][1] + ", " +  hotspots[h][2]);
     }
   }
 
