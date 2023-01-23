@@ -34,30 +34,6 @@ const teleportationPatterns = (xr, floorMeshes) => {
       //console.log(hotspots[h][0] + ", " + hotspots[h][1] + ", " +  hotspots[h][2]);
     }
   }
-  /*
-	conference positions
-	[x= 0, z = -2]
-	[x= -5, z = 0]
-	[x= 0, z = 2]
-	[x= 5, z = 0]
-    let interestingSpot0 = new BABYLON.Vector3(0, 1, -2);
-    let interestingSpot1 = new BABYLON.Vector3(-5, 1, 0);
-    let interestingSpot2 = new BABYLON.Vector3(0, 1, 2);
-    let interestingSpot3 = new BABYLON.Vector3(5, 1, 0);
-*/
-
-  /*
-	open positions
-	[x= 6.48 , z = 7.94 ]
-	[x= 5.35 , z = -4.52]
-	[x= -6.45, z = -3.26]
-	[x= -6.7 , z = 7.7  ]
-  
-		const interestingSpot0 = new BABYLON.Vector3(6.48 , 1, 7.94 );
-		const interestingSpot1 = new BABYLON.Vector3(5.35 , 1, -4.52);
-		const interestingSpot2 = new BABYLON.Vector3(-6.45, 1, -3.26);
-		const interestingSpot3 = new BABYLON.Vector3(-6.7 , 1, 7.7  );
-*/
 
   let locomotionPattern = (xr, floorMeshes) =>
   {

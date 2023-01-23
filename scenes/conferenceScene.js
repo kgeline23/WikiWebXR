@@ -41,14 +41,13 @@ let createConferenceScene = function()
 		else console.log("no ground found");	
 
 		//hotspot positions
-		let hotspots = 
+		scene.hotspots = 		
 		[
 			[0 , 1, -2],
 			[-5, 1, 0 ],
 			[0 , 1, 2 ],
 			[5 , 1, 0 ]
-		];
-		scene.hotspots = hotspots;		
+		];;		
 	};
 
 	assetsManager.onFinish = function (tasks) 

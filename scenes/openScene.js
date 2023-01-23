@@ -23,9 +23,10 @@ let createOpenScene = function()
 		[-6.45, 1, -3.26],
 		[-6.7 , 1, 7.7  ]
 	];	
-
+	console.log("after hotspots");
 	let start = function () {
 		//table scaling and positioning
+		console.log("in start");
 		let table = scene.getNodeByName("table");
 	if (table) {}
         table.scaling = new BABYLON.Vector3(0.003, 0.003, 0.003);
@@ -43,7 +44,8 @@ let createOpenScene = function()
 
 		//get floor/ground needed for navigation
 		if (scene.getNodeByName("ground"))
-		{			
+		{
+			console.log("get ground");			
 			scene.floorMeshes = scene.getNodeByName("ground");
 		}
 		else console.log("no ground found");
