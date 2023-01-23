@@ -1,4 +1,4 @@
-let createConferenceScene = function() 
+let createConferenceScene = async function(engine) 
 {
 	let scene = new BABYLON.Scene(engine);	
 	// camera
