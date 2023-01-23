@@ -33,12 +33,14 @@ let createConferenceScene = async function(engine, canvas)
 			sky.setEnabled(false);
 		}
 
-		//get floor/ground needed for navigation
-		if(scene.getNodeByName("ground"))
-		{
-			scene.floorMeshes = scene.getNodeByName("ground");
-		}
-		else console.log("no ground found");	
+			//get floor/ground needed for navigation
+			const ground = scene.getNodeByName("ground");
+			if (ground)
+			{
+				console.log("get ground");			
+				scene.floorMeshes = [ground];
+			}
+			else console.log("no ground found");
 
 		//hotspot positions
 		scene.hotspots = 		

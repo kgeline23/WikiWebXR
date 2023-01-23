@@ -52,7 +52,7 @@ let createOpenScene = async function(engine, canvas)
 			if (ground)
 			{
 				console.log("get ground");			
-				scene.floorMeshes = ground;
+				scene.floorMeshes = [ground];
 			}
 			else console.log("no ground found");
 			scene.camera = camera;
