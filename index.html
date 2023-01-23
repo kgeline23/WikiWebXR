@@ -93,7 +93,7 @@
                         let defaultXRExperience;
                         let curScene = sceneOpen;
 
-                        let createGUI = function()
+                        let createGUI = async function()
                         {
                             if (advancedTexture !== null)
                                 advancedTexture.dispose(); 
@@ -154,11 +154,12 @@
                                 }
                             );
                             //init vr
-                            defaultXRExperience = curScene.createDefaultXRExperienceAsync({
+                            defaultXRExperience = await curScene.createDefaultXRExperienceAsync({
                                 floorMeshes: [curScene.floorMeshes]
                             });
                             if (!defaultXRExperience.baseExperience) {
                                 // no xr support
+                                console.log("no xr");
                             } else {
                                 // all good, ready to go
                                 //teleportationPatterns(defaultXRExperience, curScene.floorMeshes);
