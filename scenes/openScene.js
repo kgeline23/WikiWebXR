@@ -15,9 +15,19 @@ let createOpenScene = function()
 	
 	assetsManager.load();
 
+	//hotspot positions
+	scene.hotspots = 
+	[
+		[6.48 , 1, 7.94],
+		[5.35 , 1, -4.52],
+		[-6.45, 1, -3.26],
+		[-6.7 , 1, 7.7  ]
+	];	
+
 	let start = function () {
 		//table scaling and positioning
 		let table = scene.getNodeByName("table");
+	if (table) {}
         table.scaling = new BABYLON.Vector3(0.003, 0.003, 0.003);
 		table.position = new BABYLON.Vector3(37, 0, 2);
 
@@ -37,15 +47,6 @@ let createOpenScene = function()
 			scene.floorMeshes = scene.getNodeByName("ground");
 		}
 		else console.log("no ground found");
-
-		//hotspot positions
-		scene.hotspots = 
-		[
-			[6.48 , 1, 7.94],
-			[5.35 , 1, -4.52],
-			[-6.45, 1, -3.26],
-			[-6.7 , 1, 7.7  ]
-		];	
 	};
 
 	assetsManager.onFinish = function (tasks) 

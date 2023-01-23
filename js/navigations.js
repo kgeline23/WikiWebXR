@@ -13,15 +13,16 @@
     });
   }
 
-  let hotspotPattern = (xr, floorMeshes, hotspots) =>
+  let hotspotPattern = (xr, scene) =>
   {
     const featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
     const move = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", {
       xrInput: xr.input,
-      floorMeshes: [floorMeshes],      
+      floorMeshes: [scene.floorMeshes],      
       snapToPositionRadius: 1.2,
       snapPointsOnly: true,
     });
+    const hotspots = scene.hotspots;
     for(h = 0; h < hotspots.length; h++) 
     {
       move.addSnapPoint(new BABYLON.Vector3(hotspots[h][0], hotspots[h][1], hotspots[h][2]));
