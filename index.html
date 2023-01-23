@@ -91,10 +91,12 @@
                         let clicks              = 0;
                         let advancedTexture     = null;                        
                         let defaultXRExperience;
-                        let curScene = sceneOpen;
+                        let curScene = sceneConference;
 
                         let createGUI = async function()
                         {
+                            console.log("inside GUI") ; 
+
                             if (advancedTexture !== null)
                                 advancedTexture.dispose(); 
                             advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI", true, curScene);

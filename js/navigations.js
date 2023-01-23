@@ -1,5 +1,6 @@
 const teleportationPatterns = (xr, floorMeshes) => {
-    const featuresManager = xr.baseExperience.featuresManager; 
+  console.log("in teleportation");  
+  const featuresManager = xr.baseExperience.featuresManager; 
     featuresManager.enableFeature(BABYLON.WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
         xrInput: xr.input,
         floorMeshes: floorMeshes,
