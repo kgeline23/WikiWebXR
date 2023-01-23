@@ -85,10 +85,10 @@
                             const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
                             
 
-                            let sceneOpen           = await createOpenScene(engine);
-                            let sceneOffice         = await createOfficeScene(engine);
-                            //let sceneMultiOffice    = createMultiOfficeScene(engine);
-                            let sceneConference     = await createConferenceScene(engine);
+                            let sceneOpen           = await createOpenScene(engine, canvas);
+                            let sceneOffice         = await createOfficeScene(engine, canvas);
+                            //let sceneMultiOffice    = createMultiOfficeScene(engine, canvas);
+                            let sceneConference     = await createConferenceScene(engine, canvas);
             
                             let clicks              = 0;
                             let advancedTexture     = null;                        

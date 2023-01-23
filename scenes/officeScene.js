@@ -1,4 +1,4 @@
-let createOfficeScene = async function(engine) 
+let createOfficeScene = async function(engine, canvas) 
 {	
 	let scene = new BABYLON.Scene(engine);	
 	// camera
