@@ -13,7 +13,7 @@
     });
   }
 
-  let hotspotPattern = (xr, scene) =>
+  const hotspotPattern = (xr, scene) =>
   {
     const featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
     const move = featuresManager.enableFeature(WebXRFeatureName.TELEPORTATION, "stable", {
@@ -23,10 +23,11 @@
       snapPointsOnly: true,
     });
     const hotspots = scene.hotspots;
+    console.log(scene);
     for(h = 0; h < hotspots.length; h++) 
     {
       move.addSnapPoint(new BABYLON.Vector3(hotspots[h][0], hotspots[h][1], hotspots[h][2]));
-      console.log(hotspots[h][0] + ", " + hotspots[h][1] + ", " +  hotspots[h][2]);
+      //console.log(hotspots[h][0] + ", " + hotspots[h][1] + ", " +  hotspots[h][2]);
     }
   }
   /*
