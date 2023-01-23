@@ -4,7 +4,7 @@ const teleportationPatterns = (xr, floorMeshes) => {
     featuresManager.enableFeature(BABYLON.WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
         xrInput: xr.input,
         floorMeshes: floorMeshes,
-        //useMainComponentOnly: true,
+        useMainComponentOnly: true,
         defaultTargetMeshOptions: 
         {
           teleportationFillColor: "#55FF99",

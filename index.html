@@ -82,8 +82,7 @@
                     <script type = "text/javascript">
                         const main = async () => {
                             const canvas = document.getElementById("sceneCanvas");      //get the canvas element
-                            const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
-                            
+                            const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine                            
 
                             let sceneOpen           = await createOpenScene(engine, canvas);
                             let sceneOffice         = await createOfficeScene(engine, canvas);
