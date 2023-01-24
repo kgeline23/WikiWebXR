@@ -55,7 +55,7 @@ const teleportationPatterns = (xr, floorMeshes) => {
 
     const featureManager = xr.baseExperience.featuresManager;
     featureManager.disableFeature(BABYLON.WebXRFeatureName.TELEPORTATION);
-    featureManager.enableFeature(BABYLON.WebXRFeatureName.MOVEMENT, "latest", 
+     featureManager.enableFeature(BABYLON.WebXRFeatureName.MOVEMENT, "latest", 
     {
       xrInput: xr.input,
       customRegistrationConfigurations: swappedHandednessConfiguration,

@@ -92,7 +92,7 @@
                             let clicks              = 0;
                             let advancedTexture     = null;                        
                             let defaultXRExperience;
-                            let curScene = sceneOpen;
+                            let curScene = sceneConference;
 
                             let createGUI = async function()
                             {
@@ -117,11 +117,11 @@
                                         switch (clicks % 3) {
                                             default:
                                             case 0:
-                                                curScene = sceneOpen;
+                                                curScene = sceneConference;
                                                 createGUI();                                            
                                                 break;
                                             case 1:
-                                                curScene = sceneConference;
+                                                curScene = sceneOpen;
                                                 createGUI();                                            
                                                 break;
                                             case 2:  
@@ -166,8 +166,9 @@
                                     console.log("no xr");
                                 } else {
                                     // all good, ready to go
-                                    //teleportationPatterns(defaultXRExperience, curScene.floorMeshes);
-                                    hotspotPattern(defaultXRExperience, curScene);
+                                    teleportationPatterns(defaultXRExperience, curScene.floorMeshes);
+                                    //hotspotPattern(defaultXRExperience, curScene);
+
                                 }
                             }
                             createGUI(sceneOpen);

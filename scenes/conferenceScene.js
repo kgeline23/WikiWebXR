@@ -25,12 +25,11 @@ let createConferenceScene = async function(engine, canvas)
 		{
 			//room scaling 		
 			let room = scene.getNodeByName("room");
-			room.scaling = new BABYLON.Vector3(2, 2, 2);
+			room.scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
 
 			//disable sky and walls in model
 			let walls = scene.getNodeByName("walls");
-			let sky = scene.getNodeByName("sky");		
-		
+			let sky = scene.getNodeByName("sky");				
 			if (walls)
 			{			
 				walls.setEnabled(false);
@@ -56,7 +55,7 @@ let createConferenceScene = async function(engine, canvas)
 				[-5, 0, 0 ],
 				[0 , 0, 2 ],
 				[5 , 0, 0 ]
-			];;				scene.camera = camera;
+			];;				
 			
 			resolve(scene);
 

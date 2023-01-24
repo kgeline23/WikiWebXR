@@ -20,45 +20,14 @@ let createOpenScene = async function(engine, canvas)
 		//hotspot positions
 		scene.hotspots = 
 		[
-			[-9.04, 0, -9.04],
+			[-9.04, 0, -7.94],
 			[-7.18, 0, 6.5  ],
 			[4.73 , 0, 5.56 ],
 			[5.66 , 0, -7.7 ]
 		];	
-		console.log("after hotspots");
 	
 		assetsManager.onFinish = function (tasks) 
 		{
-			//table scaling and positioning
-			console.log("in start");
-			/*
-			const table = scene.getNodeByName("table");
-			if (table) {
-				table.scaling = new BABYLON.Vector3(0.0008, 0.0008, 0.0008);
-				table.position = new BABYLON.Vector3(2, 0, -3);
-			}
-			//kitchen scaling and positioning
-			const kitchen = scene.getNodeByName("kitchen");
-			if (kitchen)
-			{	
-				kitchen.scaling = new BABYLON.Vector3(0.0007, 0.0007, 0.0007);
-				kitchen.position = new BABYLON.Vector3(5, -0.1, 4);
-			}
-				
-			//couch_set scaling and positioning
-			const couch_set = scene.getNodeByName("couch_set");
-			if (couch_set)
-			{
-				couch_set.scaling = new BABYLON.Vector3(0.35, 0.35, 0.35);
-				couch_set.position = new BABYLON.Vector3(-3, 0, -4.5);
-			}	
-			//stairs scaling and positioning
-			const stairs = scene.getNodeByName("stairs");
-			if (stairs)
-			{
-				stairs.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
-			}
-*/
 			//get floor/ground needed for navigation
 			const ground = scene.getNodeByName("ground");
 			if (ground)
