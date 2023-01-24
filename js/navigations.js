@@ -43,7 +43,7 @@ const teleportationPatterns = (xr, floorMeshes) => {
         },
       },
       {
-        allowedComponentTypes: [BABYLON.WebXRControllerComponent.THUMBSTICK_TYPE, WebXRControllerComponent.TOUCHPAD_TYPE],
+        allowedComponentTypes: [BABYLON.WebXRControllerComponent.THUMBSTICK_TYPE, BABYLON.WebXRControllerComponent.TOUCHPAD_TYPE],
         forceHandedness: "left",
         axisChangedHandler: (axes, movementState, featureContext, xrInput) => 
         {
