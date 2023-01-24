@@ -29,7 +29,7 @@ const teleportationPatterns = (xr, floorMeshes) => {
     }
   }
 
-  let locomotionPattern = (xr, floorMeshes) =>
+  let locomotionPattern = (xr, scene) =>
   {
     const swappedHandednessConfiguration = 
     [
