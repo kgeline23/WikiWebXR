@@ -35,7 +35,7 @@ export const locomotionPattern = (xr, scene) =>
   [
     {
       allowedComponentTypes: [BABYLON.WebXRControllerComponent.THUMBSTICK_TYPE, BABYLON.WebXRControllerComponent.TOUCHPAD_TYPE],
-      forceHandedness: "right",
+      forceHandedness: "left",
       axisChangedHandler: (axes, movementState, featureContext, xrInput) => 
       {
         movementState.rotateX = Math.abs(axes.x) > featureContext.rotationThreshold ? axes.x : 0;
@@ -43,12 +43,13 @@ export const locomotionPattern = (xr, scene) =>
       },
     },
     {
+      //for horizontal movement
       allowedComponentTypes: [BABYLON.WebXRControllerComponent.THUMBSTICK_TYPE, BABYLON.WebXRControllerComponent.TOUCHPAD_TYPE],
-      forceHandedness: "left",
+      forceHandedness: "right",
       axisChangedHandler: (axes, movementState, featureContext, xrInput) => 
       {
         movementState.moveX = Math.abs(axes.x) > featureContext.movementThreshold ? axes.x : 0;
-        movementState.moveY = Math.abs(axes.y) > featureContext.movementThreshold ? axes.y : 0;
+        movementState.moveY = 0;
       },
     }
   ];
