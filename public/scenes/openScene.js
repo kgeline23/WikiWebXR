@@ -6,13 +6,12 @@ export const createOpenScene = async function(engine, canvas)
 	{
 		let scene = new BABYLON.Scene(engine);	
 		// camera
-		//let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
-		let camera = new BABYLON.ArcRotateCamera("Camera", -0.88, 1.14, 18, new BABYLON.Vector3(0, 0, 0), scene); 
-		//camera.setTarget(BABYLON.Vector3.Zero());
+		const camera = new BABYLON.ArcRotateCamera("Camera", -0.88, 1.14, 18, new BABYLON.Vector3(0, 0, 0), scene); 
 		camera.attachControl(canvas, true);
-	
-		let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);	
-		let assetsManager = new BABYLON.AssetsManager(scene);
+		const light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);	
+		scene.navigation = true; //this will differentiate between free moving or stationary scenes for navigation
+
+		const assetsManager = new BABYLON.AssetsManager(scene);
 		let myMesh = [];
 		//loadEntitiy definition in js/script.js
 		LoadEntity("open", "", "./assets/models/", "openScene.glb", assetsManager, myMesh);
