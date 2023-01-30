@@ -8,7 +8,6 @@ import { createMultiOfficeScene } from "../scenes/multiofficeScene.js";
 import { createConferenceScene } from "../scenes/conferenceScene.js";
 import { createOfficeScene } from "../scenes/officeScene.js";
 import { teleportationPatterns, hotspotPattern, locomotionPattern } from "./navigations.js";
-import { LoadEntity } from "./scripts.js";
 //import "./controller.js";
 
 //Loading WebXR scene
@@ -94,9 +93,10 @@ const main = async () => {
             // no xr support
             alert("no xr available on this device, install the webXR API emulator");
         } else {
-            // all good, ready to go
-            teleportationPatterns(defaultXRExperience, curScene.floorMeshes);
+            // VR available 
+            //teleportationPatterns(defaultXRExperience, curScene.floorMeshes);
             //hotspotPattern(defaultXRExperience, curScene);
+            locomotionPattern(defaultXRExperience);
         }
     }	
     createGUI();

@@ -29,10 +29,13 @@ export const hotspotPattern = (xr, scene) =>
   }
 }
 
-export const locomotionPattern = (xr, scene) =>
+export const locomotionPattern = (xr) =>
 {
+
+  //const cameraImposter = camera.getPhysicsImposter();
+
   const swappedHandednessConfiguration = 
-  [
+  [ //z-axis is height should stay constantwhen moving on a flat surface
     {
       allowedComponentTypes: [BABYLON.WebXRControllerComponent.THUMBSTICK_TYPE, BABYLON.WebXRControllerComponent.TOUCHPAD_TYPE],
       forceHandedness: "left",
@@ -48,8 +51,8 @@ export const locomotionPattern = (xr, scene) =>
       forceHandedness: "right",
       axisChangedHandler: (axes, movementState, featureContext, xrInput) => 
       {
-        movementState.moveX = Math.abs(axes.x) > featureContext.movementThreshold ? axes.x : 0;
-        movementState.moveY = 0;
+        movementState.moveX = (Math.abs(axes.x) > featureContext.movementThreshold) ? axes.x : 0;
+        movementState.moveY = Math.abs(axes.y) > featureContext.movementThreshold ? axes.y : 0;
       },
     }
   ];

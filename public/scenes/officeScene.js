@@ -5,13 +5,12 @@ export const createOfficeScene = async function(engine, canvas)
 		{
 		let scene = new BABYLON.Scene(engine);	
 		// camera
-		//let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
-		let camera = new BABYLON.ArcRotateCamera("Camera", -3.85, 0.72, 325.57, new BABYLON.Vector3(0, 0, 0), scene);
-		//camera.setTarget(BABYLON.Vector3.Zero());
+		const camera = new BABYLON.ArcRotateCamera("Camera", -3.85, 0.72, 325.57, new BABYLON.Vector3(0, 0, 0), scene);
 		camera.attachControl(canvas, true);
+		const light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);	
+		scene.navigation = false; //this will differentiate between free moving or stationary scenes for navigation
 
-		let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);	
-		let assetsManager = new BABYLON.AssetsManager(scene);
+		const assetsManager = new BABYLON.AssetsManager(scene);
 		let myMesh = [];
 		//loadEntitiy definition in js/script.js
 		LoadEntity("office", "", "./assets/models/room_office/", "scene.glb", assetsManager, myMesh);

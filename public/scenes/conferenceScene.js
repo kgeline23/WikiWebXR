@@ -6,19 +6,17 @@ export const createConferenceScene = async function(engine, canvas)
 
 		let scene = new BABYLON.Scene(engine);	
 		// camera
-		//let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
-		let camera = new BABYLON.ArcRotateCamera("Camera", -0.88, 1.14, 18, new BABYLON.Vector3(0, 0, 5), scene); 
-		//camera.setTarget(BABYLON.Vector3.Zero());
+		const camera = new BABYLON.ArcRotateCamera("Camera", -0.88, 1.14, 18, new BABYLON.Vector3(0, 0, 5), scene);
 		camera.attachControl(canvas, true);
+		scene.navigation = true; //this will differentiate between free moving or stationary scenes for navigation
 
-		let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
-		let assetsManager = new BABYLON.AssetsManager(scene);
+		const light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
+		const assetsManager = new BABYLON.AssetsManager(scene);
 		let myMesh = [];
 		//loadEntitiy definition in js/script.js
 		LoadEntity("conference", "", "./assets/models/room_conference/", "conferenceScene.glb", assetsManager, myMesh);
 		
 		assetsManager.load();
-
 		assetsManager.onFinish = function (tasks) 
 		{
 			//room scaling 		
