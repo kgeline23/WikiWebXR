@@ -3,6 +3,7 @@
 * Copyright 2013-2022 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-clean-blog/blob/master/LICENSE)
 */
+
 window.addEventListener('DOMContentLoaded', () => {
     let scrollPos = 0;
     const mainNav = document.getElementById('mainNav');
@@ -54,4 +55,16 @@ export const LoadEntity = function (name, meshNameToLoad, url, file, manager, me
     meshTask.onError = function (task, message, exception) {
         console.log(message, exception);
     }
+}
+
+export const LoadScene = function(engine, navigation, capHeight)
+{
+    let scene = new BABYLON.Scene(engine);
+    scene.enablePhysics();
+    scene.navigation = navigation; //this will differentiate between free moving or stationary scenes for navigation
+
+    const light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);	
+    //TODO : get users height from headset
+    scene.avatar = BABYLON.MeshBuilder.CreateCapsule("avatar", {radius:0.25, height: capHeight}, scene);
+    return scene;
 }
