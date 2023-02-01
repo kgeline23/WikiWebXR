@@ -58,18 +58,18 @@ export const locomotionPattern = (xr, scene) =>
           
           switch (el.id) {
             case "button":
-            el.onButtonStateChangedObservable.add(() => 
-            {
+              el.onButtonStateChangedObservable.add(() => 
+              {
 
-            });
+              });
             break;
             case "xr-standard-thumbstick":
-            el.onAxisValueChangedObservable.add((axes) => 
-            {
-              //if thumbstick is moved change camera position that is attached to the avatar
-              scene.avatar.movex =  Math.abs(axes.x) > featureContext.movementThreshold ? axes.x : 0;
-              scene.avatar.movey =  Math.abs(axes.y) > featureContext.movementThreshold ? axes.y : 0;
-            });
+              el.onAxisValueChangedObservable.add((axes) => 
+              {
+                //if thumbstick is moved change camera position that is attached to the avatar
+                scene.avatar.position.x =  Math.abs(axes.x) > featureContext.movementThreshold ? axes.x : 0;
+                scene.avatar.position.y =  Math.abs(axes.y) > featureContext.movementThreshold ? axes.y : 0;
+              });
             break;
           }
         }

@@ -134,7 +134,6 @@ const main = async () => {
             }
         );
 
-        console.log(curScene.navigation);
         if(curScene.navigation)
         {  
             createNavigation();
