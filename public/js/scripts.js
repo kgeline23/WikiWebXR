@@ -68,3 +68,4 @@ export const LoadScene = function(engine, navigation, capHeight)
     scene.avatar = BABYLON.MeshBuilder.CreateCapsule("avatar", {radius:0.25, height: capHeight}, scene);
     return scene;
 }
+

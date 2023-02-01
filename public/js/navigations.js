@@ -1,4 +1,6 @@
 
+import "https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js";
+
 export const teleportationPatterns = (xr, scene) => 
 {
   if(scene.navigation)
@@ -11,6 +13,7 @@ export const teleportationPatterns = (xr, scene) =>
         //useMainComponentOnly: true,
         defaultTargetMeshOptions: 
         {
+          
           teleportationFillColor: "#55FF99",
           teleportationBorderColor: "blue"
         }
@@ -67,8 +70,8 @@ export const locomotionPattern = (xr, scene) =>
               el.onAxisValueChangedObservable.add((axes) => 
               {
                 //if thumbstick is moved change camera position that is attached to the avatar
-                scene.avatar.position.x =  Math.abs(axes.x) > featureContext.movementThreshold ? axes.x : 0;
-                scene.avatar.position.y =  Math.abs(axes.y) > featureContext.movementThreshold ? axes.y : 0;
+                scene.avatar.position.x += Math.abs(axes.x) > featureContext.movementThreshold ? axes.x : 0;
+                scene.avatar.position.y += Math.abs(axes.y) > featureContext.movementThreshold ? axes.y : 0;
               });
             break;
           }

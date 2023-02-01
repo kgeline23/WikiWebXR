@@ -30,7 +30,7 @@ export const createOfficeScene = async function(engine, canvas)
 
 			const sceneCamera = scene.getCameraByName("sceneCamera");
 			if (sceneCamera) {
-				sceneCamera.parent = avatar; 						//this attaches the camera to the avatar (capsule)
+				sceneCamera.parent = avatar; 						//attach the camera to the avatar (capsule)
 				sceneCamera.checkCollisions;
 				scene.switchActiveCamera(sceneCamera, true);
 			}
