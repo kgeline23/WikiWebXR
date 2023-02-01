@@ -2,11 +2,11 @@
   "name": "wikiwebxr",
   "version": "0.1.0",
   "description": "WebXR Wiki",
-  "main": "index.html",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
-    "start": "webpack serve --open",
+    "start": "node server.js",
     "build": "webpack"
   },
   "repository": {
@@ -16,10 +16,16 @@
   "author": "Klaudia",
   "license": "ISC",
   "devDependencies": {
+    "@babylonjs/core": "^5.44.0",
+    "@babylonjs/gui": "^5.44.0",
+    "@babylonjs/loaders": "^5.44.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "babylonjs": "^5.44.0",
+    "babylonjs-gui": "^5.44.0",
+    "cannon": "^0.6.2",
     "html-webpack-plugin": "^5.5.0"
   }
 }
