@@ -1,69 +1,81 @@
-export const teleportationPatterns = (xr, floorMeshes) => 
+
+export const teleportationPatterns = (xr, scene) => 
 {
-  const featuresManager = xr.baseExperience.featuresManager; 
-    featuresManager.enableFeature(BABYLON.WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, {
+  if(scene.navigation)
+  {  
+    const featuresManager = xr.baseExperience.featuresManager; 
+    featuresManager.enableFeature(BABYLON.WebXRFeatureName.TELEPORTATION, "stable" /* or latest */, 
+    {
         xrInput: xr.input,
-        floorMeshes: floorMeshes,
+        floorMeshes: scene.floorMeshes,
         //useMainComponentOnly: true,
         defaultTargetMeshOptions: 
         {
           teleportationFillColor: "#55FF99",
           teleportationBorderColor: "blue"
         }
-    });
+    });    
+  }
 }
 
 export const hotspotPattern = (xr, scene) =>
 {
-  const featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
-  const move = featuresManager.enableFeature(BABYLON.WebXRFeatureName.TELEPORTATION, "stable", {
-    xrInput: xr.input,
-    floorMeshes: scene.floorMeshes,      
-    snapToPositionRadius: 1.2,
-    snapPointsOnly: true
-  });
-  const hotspots = scene.hotspots;
-  for(h = 0; h < hotspots.length; h++) 
-  {
-    move.addSnapPoint(new BABYLON.Vector3(hotspots[h][0], hotspots[h][1], hotspots[h][2]));
+  if (scene.hotspots != null && typeof scene.hotspots == typeof [] && scene.hotspots.length > 0) {
+    const featuresManager = xr.baseExperience.featuresManager; // or any other way to get a features manager
+    const move = featuresManager.enableFeature(BABYLON.WebXRFeatureName.TELEPORTATION, "stable", {
+      xrInput: xr.input,
+      floorMeshes: scene.floorMeshes,      
+      snapToPositionRadius: 1.2,
+      snapPointsOnly: true
+    });
+    const hotspots = scene.hotspots;
+    for(let h = 0; h < hotspots.length; h++) 
+    {
+      move.addSnapPoint(new BABYLON.Vector3(hotspots[h][0], hotspots[h][1], hotspots[h][2]));
+    }
   }
 }
 
-export const locomotionPattern = (xr) =>
+export const locomotionPattern = (xr, scene) =>
 {
-
-  //const cameraImposter = camera.getPhysicsImposter();
-
-  const swappedHandednessConfiguration = 
-  [ //z-axis is height should stay constantwhen moving on a flat surface
+  if(scene.navigation)
+  {  
+    const featureManager = xr.baseExperience.featuresManager;
+    featureManager.disableFeature(BABYLON.WebXRFeatureName.TELEPORTATION);
+    xr.input.onControllerAddedObservable.add((inputSource) => 
     {
-      allowedComponentTypes: [BABYLON.WebXRControllerComponent.THUMBSTICK_TYPE, BABYLON.WebXRControllerComponent.TOUCHPAD_TYPE],
-      forceHandedness: "left",
-      axisChangedHandler: (axes, movementState, featureContext, xrInput) => 
+      inputSource.onMotionControllerInitObservable.add((motionController) => 
       {
-        movementState.rotateX = Math.abs(axes.x) > featureContext.rotationThreshold ? axes.x : 0;
-        movementState.rotateY = Math.abs(axes.y) > featureContext.rotationThreshold ? axes.y : 0;
-      },
-    },
-    {
-      //for horizontal movement
-      allowedComponentTypes: [BABYLON.WebXRControllerComponent.THUMBSTICK_TYPE, BABYLON.WebXRControllerComponent.TOUCHPAD_TYPE],
-      forceHandedness: "right",
-      axisChangedHandler: (axes, movementState, featureContext, xrInput) => 
-      {
-        movementState.moveX = (Math.abs(axes.x) > featureContext.movementThreshold) ? axes.x : 0;
-        movementState.moveY = Math.abs(axes.y) > featureContext.movementThreshold ? axes.y : 0;
-      },
-    }
-  ];
+        if (motionController.handedness === 'left')
+          leftController = motionController;
+        else
+          rightController = motionController;
 
-  const featureManager = xr.baseExperience.featuresManager;
-  featureManager.disableFeature(BABYLON.WebXRFeatureName.TELEPORTATION);
-    featureManager.enableFeature(BABYLON.WebXRFeatureName.MOVEMENT, "latest", 
-  {
-    xrInput: xr.input,
-    customRegistrationConfigurations: swappedHandednessConfiguration,
-  });
+        const xr_ids = motionController.getComponentIds();
+        for (let i=0; i < xr_ids.length; i++) 
+        {
+          const el = motionController.getComponent(xr_ids[i]);
+          
+          switch (el.id) {
+            case "button":
+            el.onButtonStateChangedObservable.add(() => 
+            {
+
+            });
+            break;
+            case "xr-standard-thumbstick":
+            el.onAxisValueChangedObservable.add((axes) => 
+            {
+              //if thumbstick is moved change camera position that is attached to the avatar
+              scene.avatar.movex =  Math.abs(axes.x) > featureContext.movementThreshold ? axes.x : 0;
+              scene.avatar.movey =  Math.abs(axes.y) > featureContext.movementThreshold ? axes.y : 0;
+            });
+            break;
+          }
+        }
+      });
+    });
+  }
 }
 
 
