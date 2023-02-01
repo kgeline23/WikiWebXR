@@ -1,18 +1,20 @@
-import { LoadEntity } from "../js/scripts.js";
+import { LoadEntity, LoadScene } from "../js/scripts.js";
 
 export const createConferenceScene = async function(engine, canvas) 
 {
 	return new Promise((resolve, reject) => {
-
-		let scene = new BABYLON.Scene(engine);
+		const capHeight = 1.7;
+		const scene = new BABYLON.Scene(engine);
 		scene.enablePhysics();
 		scene.navigation = true; //this will differentiate between free moving or stationary scenes for navigation
+		const avatar = BABYLON.MeshBuilder.CreateCapsule("avatar", {radius:0.25, height: capHeight}, scene);
+		
+		// let scene = LoadScene(engine, true, capHeight); //LoadScene found in scrips.js //navigation is possible, navigation = true
+		// let avatar = scene.avatar;
 
 		const light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
 		//after ini 
-		const capHeight = 1.7;
-		const avatar = BABYLON.MeshBuilder.CreateCapsule("avatar", {radius:0.25, height: capHeight}, scene);
-	
+		
 		const assetsManager = new BABYLON.AssetsManager(scene);
 		let myMesh = [];
 		//loadEntitiy definition in js/script.js
@@ -33,7 +35,19 @@ export const createConferenceScene = async function(engine, canvas)
 				const vec = element.getAbsolutePosition();
 				scene.hotspots.push([vec.x, 0, vec.z]);
 			});		
+			
+			//get floor/ground needed for navigation
+			const ground = scene.getNodeByName("ground");
+			if (ground)
+				scene.floorMeshes = [ground];
+			else console.log("no ground found");	
+
+			//position avatar/camera on a hotspot
 			avatar.setAbsolutePosition(new BABYLON.Vector3(scene.hotspots[0][0], capHeight/2, scene.hotspots[0][2])); // y needs to be half the height as its 0,0,0 is at its center 
+			avatar.PhysicsImpostor = new BABYLON.PhysicsImpostor(avatar, BABYLON.PhysicsImpostor.CylinderImpostor, {mass: 60, friction:0.0, restitution: 0}, scene);
+			ground.PhysicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.9 }, scene);
+			
+			
 			
 			//disable sky and walls in model
 			const lights = scene.getNodeByName("lights");
@@ -50,11 +64,6 @@ export const createConferenceScene = async function(engine, canvas)
 			if (sky)	
 				sky.setEnabled(false);
 
-			//get floor/ground needed for navigation
-			const ground = scene.getNodeByName("ground");
-			if (ground)
-				scene.floorMeshes = [ground];
-			else console.log("no ground found");			
 			resolve(scene);
 
 		};		

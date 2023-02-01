@@ -4,8 +4,10 @@ export const createOpenScene = async function(engine, canvas)
 	return new Promise((resolve, reject) => 
 	{
 		const capHeight = 1.7;
-		let scene = LoadScene(engine, true, capHeight); //LoadScene found in scrips.js //navigation is possible, navigation = true
-		let avatar = scene.avatar;
+		const scene = new BABYLON.Scene(engine);
+		scene.enablePhysics();
+		scene.navigation = true; //this will differentiate between free moving or stationary scenes for navigation
+		const avatar = BABYLON.MeshBuilder.CreateCapsule("avatar", {radius:0.25, height: capHeight}, scene);
 		const light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);	
 
 		const assetsManager = new BABYLON.AssetsManager(scene);
