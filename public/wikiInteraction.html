@@ -35,7 +35,7 @@
             </div>
         </nav>
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+        <header class="masthead" style="background-image: url('assets/img/title.png')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
@@ -66,15 +66,21 @@
                             about the patterns that are available and their appropriate uses. There are a variety of available interaction patterns, however some of the patterns depend on the capabilities of 
                             the VR glasses and the software being used. The patterns will be described in the next section.</p>
                         <!--Types of Interaction Patterns-->
-                        <h2 class="section-heading">The types of Interaction Patterns</h2>                        
-                        <!-- Selection Pattern-->
-                        <h3 class="post-subtitle">Selection Patterns</h3> 
-                        <h4 class="post-subtitle">Hand Selection </h4>
-                        <p>This can use both physical hands and tracked controllers. In hand selection, the hand actions are mimicked, meaning the object to be interacted with needs to be in hands reach and they can be directly touched and picked up with the virtual hands.
-                            It can also be possible to reach an object that is at a further distance by using a controller to extend the virtual hand in a linear manner to then interact with it.
-                            A good practice for this pattern is to calculate or input the users arm length, which gives the user a more natural feel to the interaction. This can be done by asking the user to hold out the hands in front of the body when the application is started, however this is usually done automatically by the headset.                            
+                        <h2 class="section-heading">The types of Interaction Patterns</h2>   
+                        <p>Interaction patterns can be categorized into different types, including physical interaction patterns and artificial interaction patterns. 
+                            The categorization of these interaction patterns is important as it helps developers understand the various methods that can be used to enable users to interact with the virtual environment in an intuitive and natural manner. 
+                            This, in turn, can enhance the overall user experience in XR and help create more engaging and immersive virtual environments.   
+                            </br>
+                            The categorization of interaction patterns in XR is illustrated in the following image.    
                         </p> </br>
-                        <h4 class="post-subtitle">Pointing Selection </h4>
+                        <a href="#!"><img class="img-fluid" src="assets/img/interactionPatterns.png" alt="..." /></a>
+                        <span class="caption text-muted">Interaction Pattern categorization.</span>                     
+                        <!-- Physical Pattern-->
+                        <h3 class="post-subtitle">Physical interactions</h3> 
+                        <p>Physical interactions refer to the methods with which the user interacts with the virtual objects and environment with the help of the physical body, this gives the user a more natural and intuitive feel. 
+                        </p> </br>
+                        <h4 class="post-subtitle">Direct manipulation </h4>
+                        <h5 class="post-subtitle">Pointing Selection </h5>
                         <p>It is the method in which selection or interaction with an object is done by pointing at it with an input device such as a controller or hand tracking. It is often time used with combination of rays casting, which is the mathematical calculation which defines a line in a 3D space.
                             The ray is casted from the input device and the selected object is determined by the intersection between the ray and the object in the virtual environment.
                             There are 2 main ways in which point selection can be implemented:
@@ -84,68 +90,73 @@
                             <li> Gaze-based pointing: with this the headsets are used as the input device; it determines the user’s gaze direction and defines the object to be selected.</li>
                         </ul></br>
 
-                            <h4 class="post-subtitle">Volume-based Selection </h4>
+                        <h5 class="post-subtitle">Hand selection (grab)</h5>
+                        <p>This can use both physical hands and tracked controllers. In hand selection, the hand actions are mimicked, meaning the object to be interacted with needs to be in hands reach and they can be directly touched and picked up with the virtual hands.
+                            It can also be possible to reach an object that is at a further distance by using a controller to extend the virtual hand in a linear manner to then interact with it.
+                            A good practice for this pattern is to calculate or input the users arm length, which gives the user a more natural feel to the interaction. This can be done by asking the user to hold out the hands in front of the body when the application is started, however this is usually done automatically by the headset.                            
+                        </p> </br>
+                        <h5 class="post-subtitle">Transform </h5>
                         <p>
-                            Unlike the previous method this uses a 3D volume or container to select or interact with a group of data within the virtual environment. This method is useful in scenarios in which the user needs to select multiple objects at once, which can create a more efficient way of working.
-                            The following are the 3 common ways to implement it:                          
+                            Add text                       
                         </p> 
-                        <ul>
-                            <li> Sphere selection: a user defined spherical form that can be changed by a single point (the radius), all object that are within the volume are selected.</li>
-                            <li> Box selection: a user defined box-shaped volume that can be changed at two opposite points.</li>
-                            <li> Freeform selection: user can define any shape, by either drawing one or manipulation multiple points</li>
-                        </ul></br>
 
-                        <!-- Manipulation Pattern-->
-                        <h3 class="post-subtitle">Manipulation Patterns</h3>
-                        <h4 class="post-subtitle">Hand Manipulation (gestures)</h4>
+
+
+
+                        <!-- Direct interaction -->
+                        <h4 class="post-subtitle">Direct interaction</h4>
+            <h5 class="post-subtitle">Gestures</h5>
                         <p>
-                            This refers to the interaction with virtual objects by using hand or body movements, with this method the user can manipulate the objects using natural and intuitive movements. This allows for a more immersive familiar and natural way to interact with the environment.
-                            This method requires a device that has sensors or cameras which can perform hand tracking and can be a complex procedure to implement.                          
+                            Add text                       
                         </p> 
+                        </br>
+            <h5 class="post-subtitle">Pose</h5>
+                        <p> Add text
+                        </p> </br>         
+                        
+                        <!-- Artificial Pattern-->
+                        <h3 class="post-subtitle">Artificial Interaction Pattern</h3>
+                        <h4 class="post-subtitle">Indirect interactions</h4>
+                        <h5 class="post-subtitle">2D GUI & 3D GUI</h5>
+                        <p>
+                            This refers to the interfaces with which as user interacts with, such as a menu. 
+                            In XR the GUI’s can be either created in 2D or 3D. The 2D GUI interaction usually involve buttons, drop downs menus that are displayed on a flat surface (such as a computer screen). 
+                            In 3D on the other hand the GUI is created within the environment and can take different forms likes floating panels and interactive objects.
+                            Both GUI’s have the feature of widget and panels:
+                        </p>
                         <ul>
-                            <li> Hand tracking: Using sensors or cameras to track the user's hand movements and translate them into actions in the virtual environment. This can include basic gestures such as pinching, grasping, and pointing, as well as more complex gestures such as sign language.</li>
-                            <li> Skeletal tracking: Using sensors or cameras to track the user's body movements and translate them into actions in the virtual environment. This can include actions such as reaching, bending, and twisting.</li>
+                            <li> 
+                                <h6 class="post-subtitle">Widget and panels</h6>
+                                <p> This method refers to the interaction with GUI elements, this can be buttons, textboxes menus, scrollable windows, etc. 
+                                    The choice for this pattern highly depends on the requirements of the environment and user, it is best to select ones that are most intuitive, efficient, and easy to use. 
+                                </p>
+                            </li>
                         </ul>
                         </br>
-                        <h4 class="post-subtitle">Proxy Manipulation</h4>
-                        <p>the manipulation of an object through a proxy as the object scaling might not be optimal for hand manipulation, for example when the object is too large to grab with the hand.
-                        </p> </br>                        
-                        <h4 class="post-subtitle">3D Tool</h4>
-                        <p>This method manipulates objects with the help of an intermediary 3D tool. This method can be often found in applications in which VR (3D) painting can be made (example Painting VR). The 3D tools can be used to create, edit, or manipulate objects, by using hand gestures, body movements or other input methods. This is a useful method for developing design, modeling, and animations.                           
-                        </p> </br>
-                        
-                        <!-- Indirect Control Pattern-->
-                        <h3 class="post-subtitle">Indirect Control Pattern</h3>
-                        <h4 class="post-subtitle">Widget and Panels</h4>
-                        <p>This method refers to the interaction with GUI elements, this can be buttons, textboxes menus, etc. The choice for this pattern highly depends on the requirements of the environment and user, it is best to select ones that are most intuitive, efficient, and easy to use. </p>
-                        </br>
+
                         <h4 class="post-subtitle">Non-spatial Interaction</h4>
-                        <p>This method does not rely on the user’s physical movements, instead the input methods are used. These methods can include voice commands, gaze, and button. This is a great alternative for users that are not able to move or use hand gesture, therefore it is useful to have this method implemented into applications to make it more accessible and divers.
+                        <p>This method does not rely on the user’s physical movements, instead the input methods are used. 
+                            These methods can include voice commands, gaze, and button. 
+                            This is a great alternative for users that are not able to move or use hand gesture, therefore it is useful to have this method implemented into applications to make it more accessible and divers.
                             The following are examples of non-spatial interactions:
                         </p>
                         <ul>
-                            <li> Voice commands: This method allows users to interact with the virtual environment using spoken commands, which are translated into actions in the virtual environment using speech recognition technology.</li>
-                            <li> Gaze-based interaction: This method allows users to interact with the virtual environment using their gaze direction, by using eye-tracking technology to detect the point where the user is looking and using it to activate or select interface elements.</li>
-                            <li> Button-based interaction: This method allows users to interact with the virtual environment using buttons, such as those on a controller or other input device. The buttons can be used to navigate the virtual environment, select objects, and manipulate 3D tools.</li>
-                            <li> Non-spatial interaction can also include touch screens and other forms of input that don't rely on the user's physical location or movements.</li>
+                            <li> <h6 class="post-subtitle">Voice commands</h6>
+                                <p>This method allows users to interact with the virtual environment using spoken commands, which are translated into actions in the virtual environment using speech recognition technology.</p> 
+                            </li>
+                            <li> <h6 class="post-subtitle">Gaze-based interaction</h6>
+                                <p>This method allows users to interact with the virtual environment using their gaze direction, by using eye-tracking technology to detect the point where the user is looking and using it to activate or select interface elements.</p>
+                            </li>
                         </ul>
                         </br>
                         
-                        <!-- Compound Pattern-->
-                        <h3 class="post-subtitle">Compound Pattern</h3>
-                        <h4 class="post-subtitle">Hand Pointing Pattern </h4> 
-                        <p>This is the combination of hand and pointing selection pattern, the user’s hands or fingers are visualized in the VR environment and their real time actions will be mimicked. The headsets are used to track the hands and their direction. This pattern provides a more natural feel to the interaction due to the familiar gesture and allows the user to easily manipulate objects that are in the distance or are of small size.
-                            Just like the Hand manipulation, this method requires a device that has sensors or cameras which can perform hand tracking.                              
-                        </p> </br>
-                        <h4 class="post-subtitle">World in Miniature Pattern</h4>
-                        <p>Combination of proxy, multi-touch (see in Navgation Patterns) and automation, in which the user can swap between exocentric and first-person viewpoints.
-                        </p> </br>
                         <a href="#!"><img class="img-fluid" src="assets/img/post-sample-image.jpg" alt="..." /></a>
                         <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
                     </div>
                 </div>
             </div>
         </article>
+
         <!-- Footer-->
         <footer class="border-top">
             <div class="container px-4 px-lg-5">

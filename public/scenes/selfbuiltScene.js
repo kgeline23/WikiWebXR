@@ -4,13 +4,8 @@ export const createOfficeScene = async function(engine, canvas)
 	let scene = new BABYLON.Scene(engine);
 	
 	// camera
-	//let camera = new BABYLON.ArcRotateCamera("Camera", -Math.PI/2, Math.PI / 3, 25, new BABYLON.Vector3(0, 0, 4.5), scene);
 	let camera = new BABYLON.ArcRotateCamera("Camera", -3.5, 0.49, 216, new BABYLON.Vector3(-37.25, 36.14, -91.93), scene); 
-	//	let camera = new BABYLON.ArcRotateCamera("Camera", -2.2, 0.6, 361, new BABYLON.Vector3(-3.45, -0.42, 1.06), scene); 
-
-	//camera.setTarget(BABYLON.Vector3.Zero());
 	camera.attachControl(canvas, true);
-
 	let light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);
 
 	const buildFromPlan = function(walls, ply, height, scene) 
