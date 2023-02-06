@@ -14,11 +14,48 @@ import { teleportationPatterns, hotspotPattern, locomotionPattern } from "./navi
 //Loading WebXR scene
 const main = async () => {
     const canvas = document.getElementById("sceneCanvas");      //get the canvas element
-    const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine                            
+    const engine = new BABYLON.Engine(canvas, true);            //generates the babylon 3D engine
+    
+    // Display errors on page
+    const errorDiv = document.createElement("div");
+    errorDiv.style.color = "#C33"
+    document.querySelector(".sceneCanvas").after(errorDiv);
 
-    let sceneConference     = await createConferenceScene(engine, canvas);
-    let sceneOpen           = await createOpenScene(engine, canvas);
-    let sceneOffice         = await createOfficeScene(engine, canvas);
+    const showError = (error, url, line) => {
+        let errorBox = document.createElement("div");
+        let errorMes = document.createElement("h3");
+        errorMes.innerText = error;
+        let errorLin = document.createElement("span");
+        errorLin.innerText = "Line " + line + " in " + url;
+        const hr = document.createElement("hr");
+
+        errorBox.appendChild(errorMes);
+        errorBox.appendChild(errorLin);
+        errorBox.appendChild(hr);
+
+        errorDiv.appendChild(errorBox);
+    };
+
+    window.onerror = function(error, url, line) {
+        showError(error, url, line);
+    };
+
+    const result = await Promise.allSettled([
+        createConferenceScene(engine, canvas),
+        createOpenScene(engine, canvas),
+        createOfficeScene(engine, canvas)
+    ]);
+
+    result.forEach((promise) => {
+        if (promise.status === "rejected") {
+            showError(promise.reason.message, promise.reason.fileName, promise.reason.lineNumber);
+            throw new Error(promise.reason);
+        }
+    })
+
+    let sceneConference     = result[0].value; 
+    let sceneOpen           = result[1].value;
+    let sceneOffice         = result[2].value;
     //let sceneMultiOffice    = await createMultiOfficeScene(engine, canvas);
 
     let clicks = 0;                      
@@ -98,11 +135,11 @@ const main = async () => {
                         createGUI();                                            
                         break;
                     case 1:
-                        curScene = sceneOpen;
+                        curScene = sceneOffice;
                         createGUI();                                            
                         break;
                     case 2:  
-                        curScene = sceneOffice;
+                        curScene = sceneOpen ;
                         createGUI();                                            
                         break;
                     /*
@@ -138,7 +175,7 @@ const main = async () => {
         {  
             createNavigation();
         }
-        else console.log("navigation not possible in this scene")
+        else console.log("There is no navigation available for this scene")
         
         //init vr
         if (!!xrExperiences[clicks % 3]) {
@@ -154,9 +191,9 @@ const main = async () => {
             } else {
                 // VR available 
                 defaultXRExperience.baseExperience.onInitialXRPoseSetObservable.add((xrCamera) => {
-                    xrCamera.setTransformationFromNonVRCamera();
+                    //xrCamera.position = curScene.camera.globalPosition;
+                    curScene.camera = xrCamera;
                 });
-
                 hotspotPattern(defaultXRExperience, curScene);
             }
             xrExperiences[clicks % 3] = defaultXRExperience;

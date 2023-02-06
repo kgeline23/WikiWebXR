@@ -38,7 +38,7 @@ export const LoadEntity = function (name, meshNameToLoad, url, file, manager, me
         if (task.loadedMeshes.length > 0) {
             meshArray[name] = task.loadedMeshes;
             meshArray[name].position = BABYLON.Vector3.Zero();
-            //console.log(meshTask);
+            meshArray[name].checkCollisions = true;
             if (props) 
             {
                 if (props.scaling) 
@@ -49,7 +49,7 @@ export const LoadEntity = function (name, meshNameToLoad, url, file, manager, me
                 {
                     meshArray[name].position.copyFrom(props.position);
                 }
-            }
+            }       
         }
     }
     meshTask.onError = function (task, message, exception) {
@@ -57,15 +57,48 @@ export const LoadEntity = function (name, meshNameToLoad, url, file, manager, me
     }
 }
 
-export const LoadScene = function(engine, navigation, capHeight)
+export const LoadScene = function(engine, navigation)
 {
     let scene = new BABYLON.Scene(engine);
-    scene.enablePhysics();
+    setPhysics(scene);
     scene.navigation = navigation; //this will differentiate between free moving or stationary scenes for navigation
-
     const light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);	
-    //TODO : get users height from headset
-    scene.avatar = BABYLON.MeshBuilder.CreateCapsule("avatar", {radius:0.25, height: capHeight}, scene);
+    
     return scene;
 }
+
+export const setPhysics = function(scene)
+{
+    const gravityVector = new BABYLON.Vector3(0, -9.8, 0);
+    const physicsPlugin = new BABYLON.CannonJSPlugin();
+    scene.enablePhysics(gravityVector, physicsPlugin);
+}
+
+export const getHotspots = function(scene)
+{
+    const spots = scene.getNodeByName("hotspots").getChildMeshes();
+    let hotspots = [];
+    spots.forEach(element => {
+        element.computeWorldMatrix(true);
+        const vec = element.getAbsolutePosition();
+        hotspots.push([vec.x, 0, vec.z]); //assuming ground is at 0, then hotspots are 0 too
+    });	
+    return hotspots;
+}
+
+export const setSceneCamera = function(scene)
+{
+    let sceneCamera = scene.getCameraByName("sceneCamera");
+    if (sceneCamera) {
+        sceneCamera.checkCollisions;
+        sceneCamera.applyGravity = true;
+        sceneCamera.ellipsoid = new BABYLON.Vector3(1, 1, 1);
+        sceneCamera.inputs.clear();
+        sceneCamera.inputs.addMouse();
+
+        scene.switchActiveCamera(sceneCamera, true);
+        scene.camera = sceneCamera;
+    }
+}
+
 

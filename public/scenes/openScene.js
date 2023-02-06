@@ -1,45 +1,36 @@
-import { LoadEntity, LoadScene } from "../js/scripts.js";
+import { LoadEntity, LoadScene, getHotspots, setSceneCamera } from "../js/scripts.js";
+
 export const createOpenScene = async function(engine, canvas) 
 {
 	return new Promise((resolve, reject) => 
 	{
-		const capHeight = 1.7;
-		const scene = new BABYLON.Scene(engine);
-		scene.enablePhysics();
-		scene.navigation = true; //this will differentiate between free moving or stationary scenes for navigation
-		const avatar = BABYLON.MeshBuilder.CreateCapsule("avatar", {radius:0.25, height: capHeight}, scene);
-		const light = new BABYLON.HemisphericLight("hemiLight", new BABYLON.Vector3(5, 10, 0), scene);	
+		let scene = LoadScene(engine, true); //LoadScene found in scrips.js //navigation is possible, navigation = true
+
 
 		const assetsManager = new BABYLON.AssetsManager(scene);
 		let myMesh = [];
 		//loadEntitiy definition in js/script.js
 		LoadEntity("open", "", "./assets/models/", "openScene.glb", assetsManager, myMesh);
-		
 		assetsManager.load();
+
 		assetsManager.onFinish = function (tasks) 
 		{
+			//hotspot positions
+			scene.hotspots = getHotspots(scene);	
+
 			//get floor/ground needed for navigation
 			const ground = scene.getNodeByName("ground");
 			if (ground)
 				scene.floorMeshes = [ground];
 			else console.log("no ground found");
+			ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, friction: 0.8, restitution: 0.5, disableBidirectionalTransformation: true }, scene);
+			ground.checkCollisions = true;
+
+			//setting camera for scene
+			setSceneCamera(scene);
+
+
 			
-			//hotspot positions
-			scene.hotspots = [];
-			const spots = scene.getNodeByName("hotspots").getChildMeshes();
-			spots.forEach(element => {
-				element.computeWorldMatrix(true);
-				const vec = element.getAbsolutePosition();
-				scene.hotspots.push([vec.x, 0, vec.y]);
-			});
-			avatar.setAbsolutePosition(new BABYLON.Vector3(scene.hotspots[0][0], capHeight/2, scene.hotspots[0][2])); // y needs to be half the height as its 0,0,0 is at its center 
-			
-			let sceneCamera = scene.getCameraByName("sceneCamera");
-			if (sceneCamera) {
-				sceneCamera.parent = avatar; 						//this attaches the camera to the avatar (capsule)
-				sceneCamera.checkCollisions;
-				scene.switchActiveCamera(sceneCamera, true);
-			}
 			resolve(scene);
 		};
 
