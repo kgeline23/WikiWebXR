@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
     "start": "node server.js",
-    "build": "webpack"
+    "build": "npm run build:css && npm run build:js",
+    "build:js": "webpack",
+    "build:css": "npx postcss ./src/css/styles.css -o ./public/css/styles.css"
   },
   "repository": {
     "type": "git",
@@ -17,6 +19,9 @@
   "license": "ISC",
   "devDependencies": {
     "@babylonjs/core": "^5.50.1",
+    "cssnano": "^5.1.15",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^10.1.0",
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
